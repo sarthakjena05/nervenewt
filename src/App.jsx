@@ -72,7 +72,7 @@ function Navbar() {
           <Wordmark />
         </a>
         <nav className="nav__links" aria-label="Primary">
-          <a href="mailto:founders@nervenewt.com">Contact</a>
+          <a href="#contact">Contact</a>
         </nav>
       </div>
     </header>
@@ -271,7 +271,7 @@ function FAQ() {
 
 function Footer() {
   return (
-    <footer className="footer">
+    <footer className="footer" id="contact">
       <div className="section__inner footer__inner">
         <div>
           <img src={FOOTER_MARK} alt="NerveNewt" className="footer__mark" />
@@ -280,7 +280,7 @@ function Footer() {
           </p>
         </div>
         <div className="footer__links">
-          <a href="mailto:founders@nervenewt.com">Contact</a>
+          <a href="mailto:founders@nervenewt.com">founders@nervenewt.com</a>
         </div>
       </div>
       <div className="section__inner">
@@ -447,7 +447,7 @@ export default function App() {
           max-width: none;
           margin: 26px auto 0;
           padding: 0 24px;
-          font-size: clamp(0.9rem, 1.05vw, 1.05rem);
+          font-size: clamp(1rem, 1.2vw, 1.15rem);
           line-height: 1.5;
           letter-spacing: -0.012em;
           color: color-mix(in srgb, var(--text) 62%, var(--bg));
@@ -665,9 +665,22 @@ export default function App() {
 
         /* Footer */
         .footer {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          text-align: center;
+
           padding: 40px 0 28px 0;
         }
         .footer__inner {
+          width: 100%;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          text-align: center;
+
           display: flex;
           flex-direction: column;
           align-items: center;
@@ -676,6 +689,20 @@ export default function App() {
           margin-bottom: 24px;
         }
         .footer__mark { width: 44px; height: 44px; object-fit: contain; display: block; margin: 0 auto; }
+        .footer__email {
+          display: inline-block;
+          margin-top: 22px;
+          color: inherit;
+          text-decoration: none;
+          font-size: 1rem;
+          text-align: center;
+        }
+
+        .footer__email:hover {
+          text-decoration: underline;
+          text-underline-offset: 4px;
+        }
+
         .footer__tagline {
           font-size: 0.88rem;
           white-space: nowrap;
