@@ -184,16 +184,37 @@ function SignalPipeline() {
   );
 }
 
-function useEventStream() {
-  const base = [
-    { t: "19:42:01", name: "eyes.closed", v: "0.98" },
-    { t: "19:42:04", name: "eyes.open", v: "0.99" },
-    { t: "19:42:08", name: "blink", v: "0.97" },
-    { t: "19:42:12", name: "alpha_power", v: "0.73" },
-  ];
-  const [rows, setRows] = useState(base);
-  const idx = useRef(0);
-  const secs = useRef(12);
+function useSignalDemo() {
+  const [rows, setRows] = useState([
+    { t: "19:42:01", name: "signal_quality", v: "0.96" },
+    { t: "19:42:04", name: "alpha_power", v: "0.71" },
+  ]);
+  const [fired, setFired] = useState(false);
+  const [codeHighlight, setCodeHighlight] = useState(false);
+  const firedTimeout = useRef(null);
+  const codeTimeout = useRef(null);
+
+  const nowStamp = () => {
+    const d = new Date();
+    const pad = (n) => String(n).padStart(2, "0");
+    return `${pad(d.getHours())}:${pad(d.getMinutes())}:${pad(d.getSeconds())}`;
+  };
+
+  const pushRow = (name, v) => {
+    setRows((prev) => [...prev.slice(-4), { t: nowStamp(), name, v }]);
+  };
+
+  const trigger = (signalLabel) => {
+    const v = (0.88 + Math.random() * 0.11).toFixed(2);
+    pushRow(signalLabel, v);
+
+    clearTimeout(firedTimeout.current);
+    clearTimeout(codeTimeout.current);
+    setFired(true);
+    setCodeHighlight(true);
+    firedTimeout.current = setTimeout(() => setFired(false), 1400);
+    codeTimeout.current = setTimeout(() => setCodeHighlight(false), 1400);
+  };
 
   useEffect(() => {
     const reduce =
@@ -202,42 +223,133 @@ function useEventStream() {
       window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (reduce) return;
 
-    const names = ["eyes.closed", "eyes.open", "blink", "alpha_power"];
     const id = setInterval(() => {
-      idx.current = (idx.current + 1) % names.length;
-      secs.current += 3;
-      const mm = String(19).padStart(2, "0");
-      const ss = String(42 + Math.floor(secs.current / 60)).padStart(2, "0");
-      const sec = String(secs.current % 60).padStart(2, "0");
-      const name = names[idx.current];
-      const v = (0.7 + Math.random() * 0.29).toFixed(2);
-      setRows((prev) => {
-        const next = [...prev.slice(1), { t: `${mm}:${ss}:${sec}`, name, v }];
-        return next;
-      });
-    }, 3200);
+      const ambient = Math.random() > 0.5 ? "signal_quality" : "alpha_power";
+      const v =
+        ambient === "signal_quality"
+          ? (0.9 + Math.random() * 0.09).toFixed(2)
+          : (0.55 + Math.random() * 0.3).toFixed(2);
+      pushRow(ambient, v);
+    }, 4200);
     return () => clearInterval(id);
   }, []);
 
-  return rows;
+  useEffect(() => {
+    return () => {
+      clearTimeout(firedTimeout.current);
+      clearTimeout(codeTimeout.current);
+    };
+  }, []);
+
+  return { rows, fired, codeHighlight, trigger };
 }
 
-const CODE_SNIPPET = `from nervenewt import Nerve
+const CHANNELS = [
+  { name: "TP9", duration: 7.5 },
+  { name: "AF7", duration: 6.1 },
+  { name: "AF8", duration: 8.3 },
+  { name: "TP10", duration: 6.9 },
+];
+
+function buildWavePath(seed) {
+  const points = [];
+  const width = 240;
+  const height = 28;
+  const steps = 40;
+  for (let i = 0; i <= steps * 2; i++) {
+    const x = (i / steps) * width;
+    const n =
+      Math.sin(i * 0.7 + seed) * 6 +
+      Math.sin(i * 0.31 + seed * 2) * 3 +
+      Math.sin(i * 1.9 + seed) * 1.4;
+    points.push(`${x.toFixed(1)},${(height / 2 + n).toFixed(1)}`);
+  }
+  return `M${points.join(" L")}`;
+}
+
+function Waveform({ name, duration, seed }) {
+  const path = buildWavePath(seed);
+  return (
+    <div className="waveform">
+      <span className="waveform__label">{name}</span>
+      <div className="waveform__track">
+        <svg
+          className="waveform__svg"
+          viewBox="0 0 240 28"
+          preserveAspectRatio="none"
+          style={{ animationDuration: `${duration}s` }}
+          aria-hidden="true"
+        >
+          <path d={path} />
+          <path d={path} transform="translate(240, 0)" />
+        </svg>
+      </div>
+    </div>
+  );
+}
+
+const SIGNALS = [
+  { id: "alpha", label: "alpha_power", desc: "EEG alpha-band power" },
+  { id: "blink", label: "blink", desc: "Detected eye blink" },
+  { id: "eyes_closed", label: "eyes.closed", desc: "Eyes closed, sustained" },
+];
+const FILTERS = [
+  { id: "threshold", label: "Threshold(0.8)" },
+  { id: "smooth", label: "Smooth(window=5)" },
+  { id: "rate_limit", label: "RateLimit(1/s)" },
+];
+const ACTIONS = [
+  { id: "activate", label: "app.activate()" },
+  { id: "webhook", label: "app.send_webhook(event)" },
+  { id: "log", label: "app.log(event)" },
+];
+
+function BuilderColumn({ title, options, selectedId, onSelect }) {
+  return (
+    <div className="builder__col">
+      <span className="builder__col-label">{title}</span>
+      <div className="builder__options">
+        {options.map((opt) => (
+          <button
+            key={opt.id}
+            type="button"
+            className={`builder__chip${selectedId === opt.id ? " is-selected" : ""}`}
+            onClick={() => onSelect(opt.id)}
+            aria-pressed={selectedId === opt.id}
+          >
+            {opt.label}
+          </button>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function DeveloperDemo() {
+  const { rows, fired, codeHighlight, trigger } = useSignalDemo();
+  const [ref, visible] = useReveal();
+  const [copied, setCopied] = useState(false);
+  const [signalId, setSignalId] = useState("eyes_closed");
+  const [filterId, setFilterId] = useState("threshold");
+  const [actionId, setActionId] = useState("activate");
+
+  const signal = SIGNALS.find((s) => s.id === signalId);
+  const filter = FILTERS.find((f) => f.id === filterId);
+  const action = ACTIONS.find((a) => a.id === actionId);
+
+  const codeText = `from nervenewt import Nerve
 
 nerve = Nerve.connect()
 
-nerve.on("eyes.closed", lambda event:
-    app.activate()
+nerve.on(
+    "${signal.label}",
+    filter=${filter.label},
+    action=lambda event: ${action.label}
 )`;
-
-function DeveloperDemo() {
-  const rows = useEventStream();
-  const [ref, visible] = useReveal();
-  const [copied, setCopied] = useState(false);
 
   const handleCopy = async () => {
     try {
-      await navigator.clipboard.writeText(CODE_SNIPPET);
+      await navigator.clipboard.writeText(codeText);
       setCopied(true);
       setTimeout(() => setCopied(false), 1800);
     } catch (e) {
@@ -254,9 +366,29 @@ function DeveloperDemo() {
       <div className="section__inner">
         <h2 className="section__heading">Signals in. Software out.</h2>
         <p className="section__body">
-          NerveNewt provides a common interface between biosensing hardware
-          and the applications developers build on top of it.
+          Choose a signal, a filter, and an action below — NerveNewt wires
+          them together into one interface.
         </p>
+
+        <div className="waveform__panel">
+          {CHANNELS.map((c, i) => (
+            <Waveform key={c.name} name={c.name} duration={c.duration} seed={i * 1.7} />
+          ))}
+        </div>
+
+        <div className="builder">
+          <BuilderColumn title="Signal" options={SIGNALS} selectedId={signalId} onSelect={setSignalId} />
+          <span className="builder__arrow" aria-hidden="true">→</span>
+          <BuilderColumn title="Filter" options={FILTERS} selectedId={filterId} onSelect={setFilterId} />
+          <span className="builder__arrow" aria-hidden="true">→</span>
+          <BuilderColumn title="Action" options={ACTIONS} selectedId={actionId} onSelect={setActionId} />
+        </div>
+
+        <div className="demo__run">
+          <button type="button" className="trigger-btn trigger-btn--primary" onClick={() => trigger(signal.label)}>
+            Simulate this signal
+          </button>
+        </div>
 
         <div className="demo__grid">
           <div className="code-block__wrap">
@@ -268,7 +400,7 @@ function DeveloperDemo() {
             >
               {copied ? "Copied" : "Copy"}
             </button>
-            <pre className="code-block" aria-label="Example usage">
+            <pre className="code-block" aria-label="Generated code example">
               <code>
                 <span className="code-kw">from</span> nervenewt{" "}
                 <span className="code-kw">import</span> Nerve
@@ -276,12 +408,21 @@ function DeveloperDemo() {
                 nerve = Nerve.<span className="code-fn">connect</span>()
                 {"\n\n"}
                 nerve.<span className="code-fn">on</span>(
-                <span className="code-str">"eyes.closed"</span>,{" "}
-                <span className="code-kw">lambda</span> event:{"\n"}
-                {"    "}app.<span className="code-fn">activate</span>()
-                {"\n"})
+                {"\n    "}
+                <span className={`code-str${codeHighlight ? " code-str--active" : ""}`}>
+                  "{signal.label}"
+                </span>
+                ,{"\n    "}
+                filter=<span className="code-fn">{filter.label}</span>,
+                {"\n    "}
+                action=<span className="code-kw">lambda</span> event: {action.label}
+                {"\n)"}
               </code>
             </pre>
+            <div className={`demo__app-indicator${fired ? " is-active" : ""}`}>
+              <span className="demo__app-dot" aria-hidden="true" />
+              <span>{fired ? `${action.label} fired` : "idle — waiting for signal"}</span>
+            </div>
           </div>
 
           <div className="stream" aria-label="Live event stream">
@@ -302,8 +443,8 @@ function DeveloperDemo() {
         </div>
 
         <p className="demo__note">
-          A conceptual developer experience — NerveNewt's public API is
-          still taking shape.
+          A simulation, not a live device connection — NerveNewt's public
+          API is still taking shape.
         </p>
       </div>
     </section>
@@ -336,8 +477,8 @@ function PlatformDirection() {
           ))}
         </ul>
         <p className="direction__note">
-          Prototyping today with Muse 2. Broader hardware support is the
-          direction we're building toward, not current compatibility.
+          This is the direction we're building toward, not current
+          compatibility.
         </p>
       </div>
     </section>
@@ -689,6 +830,176 @@ export default function App() {
 
         /* Developer demo — flat, rule-separated, no card backgrounds */
         .demo { padding: 64px 0; border-top: 1px solid color-mix(in srgb, var(--text) 10%, var(--bg)); }
+
+        .waveform__panel {
+          display: grid;
+          grid-template-columns: repeat(4, 1fr);
+          gap: 22px;
+          max-width: 780px;
+          margin: 8px auto 30px auto;
+          padding: 20px 24px;
+          border: 1px solid color-mix(in srgb, var(--text) 10%, var(--bg));
+          border-radius: 8px;
+        }
+        .waveform {
+          display: flex;
+          flex-direction: column;
+          gap: 8px;
+          align-items: center;
+        }
+        .waveform__label {
+          font-family: 'Geist Mono', monospace;
+          font-size: 0.68rem;
+          letter-spacing: 0.03em;
+          color: color-mix(in srgb, var(--text) 45%, var(--bg));
+        }
+        .waveform__track {
+          width: 100%;
+          height: 28px;
+          overflow: hidden;
+        }
+        .waveform__svg {
+          width: 200%;
+          height: 100%;
+          display: block;
+          animation-name: waveScroll;
+          animation-timing-function: linear;
+          animation-iteration-count: infinite;
+        }
+        .waveform__svg path {
+          fill: none;
+          stroke: var(--forest);
+          stroke-width: 1.4;
+          stroke-linecap: round;
+          opacity: 0.75;
+        }
+        @keyframes waveScroll {
+          from { transform: translateX(0); }
+          to { transform: translateX(-50%); }
+        }
+        @media (prefers-reduced-motion: reduce) {
+          .waveform__svg { animation: none; }
+        }
+        @media (max-width: 640px) {
+          .waveform__panel { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        .builder {
+          display: flex;
+          align-items: flex-start;
+          justify-content: center;
+          gap: 18px;
+          max-width: 900px;
+          margin: 0 auto 28px auto;
+          flex-wrap: wrap;
+        }
+        .builder__col {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          gap: 10px;
+          min-width: 180px;
+        }
+        .builder__col-label {
+          font-size: 0.78rem;
+          color: color-mix(in srgb, var(--text) 45%, var(--bg));
+        }
+        .builder__options {
+          display: flex;
+          flex-direction: column;
+          gap: 8px;
+          width: 100%;
+        }
+        .builder__chip {
+          font-family: 'Geist Mono', monospace;
+          font-size: 0.78rem;
+          background: none;
+          border: 1px solid color-mix(in srgb, var(--text) 16%, var(--bg));
+          color: color-mix(in srgb, var(--text) 65%, var(--bg));
+          padding: 8px 12px;
+          border-radius: 6px;
+          cursor: pointer;
+          text-align: left;
+          transition: color 0.15s ease, border-color 0.15s ease, background 0.15s ease;
+        }
+        .builder__chip:hover, .builder__chip:focus-visible {
+          color: var(--forest);
+          border-color: color-mix(in srgb, var(--forest) 40%, var(--bg));
+        }
+        .builder__chip.is-selected {
+          color: var(--forest);
+          border-color: var(--forest);
+          background: color-mix(in srgb, var(--forest) 8%, transparent);
+        }
+        .builder__arrow {
+          align-self: center;
+          margin-top: 34px;
+          color: color-mix(in srgb, var(--text) 30%, var(--bg));
+          font-size: 1.1rem;
+        }
+        @media (max-width: 760px) {
+          .builder { flex-direction: column; align-items: center; }
+          .builder__arrow { transform: rotate(90deg); margin: 0; }
+        }
+
+        .demo__run {
+          display: flex;
+          justify-content: center;
+          margin-bottom: 40px;
+        }
+        .trigger-btn {
+          font-family: 'Geist Mono', monospace;
+          font-size: 0.8rem;
+          background: none;
+          border: 1px solid color-mix(in srgb, var(--text) 18%, var(--bg));
+          color: color-mix(in srgb, var(--text) 70%, var(--bg));
+          padding: 9px 16px;
+          border-radius: 6px;
+          cursor: pointer;
+          transition: color 0.15s ease, border-color 0.15s ease, background 0.15s ease, transform 0.1s ease;
+        }
+        .trigger-btn:hover, .trigger-btn:focus-visible {
+          color: var(--forest);
+          border-color: color-mix(in srgb, var(--forest) 45%, var(--bg));
+          background: color-mix(in srgb, var(--forest) 6%, transparent);
+        }
+        .trigger-btn:active { transform: scale(0.97); }
+        .trigger-btn--primary {
+          border-color: color-mix(in srgb, var(--forest) 55%, var(--bg));
+          color: var(--forest);
+        }
+
+        .code-str--active {
+          background: color-mix(in srgb, var(--signal) 45%, transparent);
+          border-radius: 3px;
+          transition: background 0.2s ease;
+        }
+
+        .demo__app-indicator {
+          display: flex;
+          align-items: center;
+          gap: 8px;
+          margin: 14px 0 0 22px;
+          font-family: 'Geist Mono', monospace;
+          font-size: 0.76rem;
+          color: color-mix(in srgb, var(--text) 45%, var(--bg));
+          transition: color 0.2s ease;
+        }
+        .demo__app-dot {
+          width: 7px;
+          height: 7px;
+          border-radius: 50%;
+          background: color-mix(in srgb, var(--text) 25%, var(--bg));
+          transition: background 0.2s ease, box-shadow 0.2s ease;
+        }
+        .demo__app-indicator.is-active {
+          color: var(--forest);
+        }
+        .demo__app-indicator.is-active .demo__app-dot {
+          background: var(--signal);
+          box-shadow: 0 0 6px color-mix(in srgb, var(--signal) 70%, transparent);
+        }
+
         .demo__grid {
           display: grid;
           grid-template-columns: 1.15fr 1fr;
