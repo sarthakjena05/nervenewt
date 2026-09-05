@@ -72,12 +72,7 @@ function Navbar() {
           <Wordmark />
         </a>
         <nav className="nav__links" aria-label="Primary">
-          <a href="#docs">Docs</a>
-          <a href="#github">GitHub</a>
-          <a href="#contact">Contact</a>
-          <a href="#updates" className="nav__cta">
-            Get updates
-          </a>
+          <a href="mailto:founders@nervenewt.com">Contact</a>
         </nav>
       </div>
     </header>
@@ -88,28 +83,11 @@ function Hero() {
   return (
     <section className="hero" id="top">
       <div className="hero__inner">
-        <p className="hero__eyebrow">Developer infrastructure for biosignals</p>
         <h1 className="hero__headline">
-          Next-generation biosignals,
+          Visual code editor that enables developers
           <br />
-          built for adaptive experiences.
+          to create adaptive human experiences.
         </h1>
-        <p className="hero__sub">
-          NerveNewt is a common interface between biosensing hardware — EEG,
-          EMG, ECG, EOG — and the applications developers build on top of it.
-        </p>
-        <div className="hero__actions">
-          <a className="link-primary" href="#pipeline">
-            Explore the platform <span aria-hidden="true">→</span>
-          </a>
-          <a className="link-secondary" href="#github">
-            View GitHub
-          </a>
-        </div>
-        <p className="hero__note">
-          Built for developers, not consumers — no headset, no app.
-          Currently prototyping with consumer EEG hardware like Muse 2.
-        </p>
       </div>
     </section>
   );
@@ -496,8 +474,7 @@ function Footer() {
           </p>
         </div>
         <div className="footer__links">
-          <a href="#github">GitHub</a>
-          <a href="#contact">Contact</a>
+          <a href="mailto:founders@nervenewt.com">Contact</a>
         </div>
       </div>
       <div className="section__inner">
@@ -511,7 +488,7 @@ export default function App() {
   return (
     <div className="app">
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&display=swap');
 
         :root {
           --bg: ${COLORS.bg};
@@ -558,7 +535,7 @@ export default function App() {
         }
 
         .section__heading {
-          font-family: 'Space Grotesk', sans-serif;
+          font-family: 'Geist', sans-serif;
           font-size: clamp(1.4rem, 2.2vw, 1.7rem);
           font-weight: 600;
           letter-spacing: -0.01em;
@@ -579,7 +556,7 @@ export default function App() {
           display: inline-flex;
           align-items: center;
           gap: 10px;
-          font-family: 'Space Grotesk', sans-serif;
+          font-family: 'Geist', sans-serif;
           font-weight: 600;
           letter-spacing: -0.01em;
           color: var(--text);
@@ -610,7 +587,7 @@ export default function App() {
           color: color-mix(in srgb, var(--text) 75%, var(--bg));
           transition: color 0.15s ease;
         }
-        .nav__links a:not(.nav__cta)::after {
+        .nav__links a::after {
           content: "";
           position: absolute;
           left: 0;
@@ -622,22 +599,11 @@ export default function App() {
           transform-origin: left;
           transition: transform 0.2s ease;
         }
-        .nav__links a:not(.nav__cta):hover::after,
-        .nav__links a:not(.nav__cta):focus-visible::after {
+        .nav__links a:hover::after,
+        .nav__links a:focus-visible::after {
           transform: scaleX(1);
         }
         .nav__links a:hover, .nav__links a:focus-visible { color: var(--text); }
-        .nav__cta {
-          border: 1px solid color-mix(in srgb, var(--forest) 55%, var(--bg));
-          color: var(--forest) !important;
-          padding: 7px 14px;
-          border-radius: 6px;
-          transition: background 0.15s ease, color 0.15s ease;
-        }
-        .nav__cta:hover, .nav__cta:focus-visible {
-          background: var(--forest);
-          color: var(--bg) !important;
-        }
 
         /* Hero */
         .hero {
@@ -647,68 +613,19 @@ export default function App() {
         .hero__inner {
           position: relative;
           z-index: 1;
-          max-width: 1040px;
+          max-width: 1100px;
           margin: 0 auto;
           padding: 0 32px;
           text-align: center;
         }
-        .hero__eyebrow {
-          font-family: 'Geist Mono', monospace;
-          font-size: 0.78rem;
-          letter-spacing: 0.01em;
-          color: color-mix(in srgb, var(--forest) 85%, var(--text));
-          margin: 0 0 20px 0;
-        }
         .hero__headline {
-          font-family: 'Space Grotesk', sans-serif;
-          font-size: clamp(2rem, 4.2vw, 3.3rem);
+          font-family: 'Geist', sans-serif;
+          font-size: clamp(1.6rem, 3.4vw, 2.5rem);
           font-weight: 700;
-          letter-spacing: -0.03em;
-          line-height: 1.16;
-          margin: 0 0 26px 0;
+          letter-spacing: -0.02em;
+          line-height: 1.22;
+          margin: 0;
         }
-        .hero__sub {
-          font-size: clamp(1.05rem, 1.6vw, 1.25rem);
-          color: color-mix(in srgb, var(--text) 68%, var(--bg));
-          max-width: 46ch;
-          margin: 0 auto 34px auto;
-        }
-        .hero__actions {
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          gap: 28px;
-          margin-bottom: 22px;
-          flex-wrap: wrap;
-        }
-        .link-primary {
-          font-size: 1rem;
-          font-weight: 500;
-          color: var(--forest);
-          border-bottom: 1px solid color-mix(in srgb, var(--forest) 45%, var(--bg));
-          padding-bottom: 2px;
-          transition: border-color 0.15s ease, opacity 0.15s ease;
-        }
-        .link-primary:hover, .link-primary:focus-visible {
-          border-color: var(--forest);
-        }
-        .link-secondary {
-          font-size: 1rem;
-          color: color-mix(in srgb, var(--text) 55%, var(--bg));
-          border-bottom: 1px solid transparent;
-          transition: color 0.15s ease, border-color 0.15s ease;
-        }
-        .link-secondary:hover, .link-secondary:focus-visible {
-          color: var(--text);
-          border-color: color-mix(in srgb, var(--text) 30%, var(--bg));
-        }
-        .hero__note {
-          font-size: 0.85rem;
-          color: color-mix(in srgb, var(--text) 45%, var(--bg));
-          max-width: 46ch;
-          margin: 0 auto;
-        }
-
         /* Pipeline — no boxed containers, just rules and type */
         .pipeline { padding: 64px 0; border-top: 1px solid color-mix(in srgb, var(--text) 10%, var(--bg)); }
         .pipeline__diagram {
@@ -732,7 +649,7 @@ export default function App() {
           font-size: 0.95rem;
         }
         .pipeline__list--mono {
-          font-family: 'Geist Mono', monospace;
+          font-family: 'Geist', sans-serif;
           font-size: 0.82rem;
         }
         .pipeline__list li {
@@ -787,7 +704,7 @@ export default function App() {
           justify-content: center;
           gap: 10px;
           padding: 0 6px;
-          font-family: 'Space Grotesk', sans-serif;
+          font-family: 'Geist', sans-serif;
           font-size: 0.88rem;
           font-weight: 600;
           color: var(--forest);
@@ -848,7 +765,7 @@ export default function App() {
           align-items: center;
         }
         .waveform__label {
-          font-family: 'Geist Mono', monospace;
+          font-family: 'Geist', sans-serif;
           font-size: 0.68rem;
           letter-spacing: 0.03em;
           color: color-mix(in srgb, var(--text) 45%, var(--bg));
@@ -911,7 +828,7 @@ export default function App() {
           width: 100%;
         }
         .builder__chip {
-          font-family: 'Geist Mono', monospace;
+          font-family: 'Geist', sans-serif;
           font-size: 0.78rem;
           background: none;
           border: 1px solid color-mix(in srgb, var(--text) 16%, var(--bg));
@@ -948,7 +865,7 @@ export default function App() {
           margin-bottom: 40px;
         }
         .trigger-btn {
-          font-family: 'Geist Mono', monospace;
+          font-family: 'Geist', sans-serif;
           font-size: 0.8rem;
           background: none;
           border: 1px solid color-mix(in srgb, var(--text) 18%, var(--bg));
@@ -980,7 +897,7 @@ export default function App() {
           align-items: center;
           gap: 8px;
           margin: 14px 0 0 22px;
-          font-family: 'Geist Mono', monospace;
+          font-family: 'Geist', sans-serif;
           font-size: 0.76rem;
           color: color-mix(in srgb, var(--text) 45%, var(--bg));
           transition: color 0.2s ease;
@@ -1013,7 +930,7 @@ export default function App() {
           position: absolute;
           top: -6px;
           right: 0;
-          font-family: 'Geist Mono', monospace;
+          font-family: 'Geist', sans-serif;
           font-size: 0.72rem;
           background: none;
           border: 1px solid color-mix(in srgb, var(--text) 16%, var(--bg));
@@ -1032,7 +949,7 @@ export default function App() {
         .code-block {
           border-left: 2px solid color-mix(in srgb, var(--forest) 40%, var(--bg));
           padding: 22px 0 2px 22px;
-          font-family: 'Geist Mono', monospace;
+          font-family: 'Geist', sans-serif;
           font-size: 0.86rem;
           line-height: 1.75;
           overflow-x: auto;
@@ -1046,7 +963,7 @@ export default function App() {
         .stream {
           border-left: 2px solid color-mix(in srgb, var(--text) 14%, var(--bg));
           padding: 2px 0 2px 22px;
-          font-family: 'Geist Mono', monospace;
+          font-family: 'Geist', sans-serif;
         }
         .stream__head {
           display: flex;
@@ -1107,7 +1024,7 @@ export default function App() {
           gap: 10px;
           list-style: none;
           padding: 0;
-          font-family: 'Geist Mono', monospace;
+          font-family: 'Geist', sans-serif;
           font-size: 0.95rem;
           color: color-mix(in srgb, var(--text) 45%, var(--bg));
           margin: 0 0 14px 0;
