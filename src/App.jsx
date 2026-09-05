@@ -442,7 +442,8 @@ export default function App() {
         }
 
         .hero__subhead {
-          max-width: 640px;
+          max-width: none;
+          white-space: nowrap;
           margin: 26px auto 0;
           font-size: clamp(1rem, 1.35vw, 1.14rem);
           line-height: 1.6;
@@ -729,6 +730,7 @@ export default function App() {
 
           .hero__subhead {
             max-width: 34ch;
+            white-space: normal;
             margin-top: 20px;
             font-size: 1rem;
           }
