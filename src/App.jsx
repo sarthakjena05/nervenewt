@@ -84,10 +84,14 @@ function Hero() {
     <section className="hero" id="top">
       <div className="hero__inner">
         <h1 className="hero__headline">
-          Visual code editor that enables developers
+          Turn biosignals into
           <br />
-          to create adaptive human experiences.
+          adaptive software.
         </h1>
+        <p className="hero__subhead">
+          A visual code editor for turning EEG, EMG, ECG, and EOG into
+          standardized events across hardware.
+        </p>
       </div>
     </section>
   );
@@ -343,14 +347,17 @@ export default function App() {
           letter-spacing: -0.01em;
           margin: 0 0 14px 0;
           text-align: center;
+          text-wrap: balance;
         }
 
         .section__body {
           font-size: 1.02rem;
           color: color-mix(in srgb, var(--text) 72%, var(--bg));
-          max-width: 46ch;
+          max-width: 52ch;
           margin: 0 auto 28px auto;
           text-align: center;
+          line-height: 1.6;
+          text-wrap: pretty;
         }
 
         /* Wordmark */
