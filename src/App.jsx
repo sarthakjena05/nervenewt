@@ -416,33 +416,42 @@ export default function App() {
 
         /* Hero */
         .hero {
-          min-height: 72vh;
           display: flex;
-          align-items: center;
-          padding: 90px 0 58px;
+          align-items: flex-start;
+          padding: 44px 0 72px;
           position: relative;
         }
         .hero__inner {
           position: relative;
           z-index: 1;
           width: 100%;
-          max-width: 1280px;
+          max-width: 1180px;
           margin: 0 auto;
-          padding: 0 40px;
+          padding: 0 32px;
           text-align: center;
         }
         .hero__headline {
           font-family: 'Geist', sans-serif;
-          font-size: clamp(2.8rem, 5.7vw, 5rem);
+          font-size: clamp(3.4rem, 6vw, 5.75rem);
           font-weight: 600;
-          letter-spacing: -0.045em;
-          line-height: 1.04;
+          letter-spacing: -0.055em;
+          line-height: 0.97;
           margin: 0 auto;
-          max-width: 1180px;
+          max-width: 980px;
           text-wrap: balance;
         }
+
+        .hero__subhead {
+          max-width: 640px;
+          margin: 26px auto 0;
+          font-size: clamp(1rem, 1.35vw, 1.14rem);
+          line-height: 1.6;
+          letter-spacing: -0.01em;
+          color: color-mix(in srgb, var(--text) 62%, var(--bg));
+          text-wrap: pretty;
+        }
         /* Pipeline — no boxed containers, just rules and type */
-        .pipeline { padding: 42px 0 88px; }
+        .pipeline { padding: 28px 0 88px; }
         .pipeline__diagram {
           margin-top: 40px;
           display: flex;
@@ -696,8 +705,25 @@ export default function App() {
         /* Mobile */
         @media (max-width: 880px) {
           .nav__links { gap: 18px; font-size: 0.86rem; }
-          .hero { min-height: 62vh; padding: 64px 0 42px; }
-          .hero__headline { max-width: 100%; }
+          .hero {
+            padding: 30px 0 58px;
+          }
+
+          .hero__inner {
+            padding: 0 22px;
+          }
+
+          .hero__headline {
+            max-width: 100%;
+            font-size: clamp(2.65rem, 11vw, 4.3rem);
+            line-height: 0.98;
+          }
+
+          .hero__subhead {
+            max-width: 34ch;
+            margin-top: 20px;
+            font-size: 1rem;
+          }
           .pipeline__diagram { flex-direction: column; align-items: stretch; gap: 20px; }
           .pulse-line { width: 1px; height: 30px; margin: 0 auto; }
           .pulse-dot { animation: travelV 3.2s ease-in-out infinite; left: 50%; }
