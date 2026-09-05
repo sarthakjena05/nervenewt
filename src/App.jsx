@@ -86,7 +86,7 @@ function Hero() {
         <h1 className="hero__headline">
           Turn biosignals into
           <br />
-          adaptive software.
+          adaptive experiences.
         </h1>
         <p className="hero__subhead">
           A visual code editor for turning EEG, EMG, ECG, and EOG into
@@ -276,7 +276,8 @@ function Footer() {
         <div>
           <img src={FOOTER_MARK} alt="NerveNewt" className="footer__mark" />
           <p className="footer__tagline">
-            Building the interface between biology and software.
+            Building the interface between{" "}
+            <span className="footer__keep">biology and software.</span>
           </p>
         </div>
         <div className="footer__links">
@@ -673,6 +674,10 @@ export default function App() {
           margin-bottom: 24px;
         }
         .footer__mark { width: 44px; height: 44px; object-fit: contain; display: block; margin: 0 auto; }
+        .footer__keep {
+          white-space: nowrap;
+        }
+
         .footer__tagline {
           font-size: 0.88rem;
           color: color-mix(in srgb, var(--text) 55%, var(--bg));
