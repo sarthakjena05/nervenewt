@@ -442,14 +442,16 @@ export default function App() {
         }
 
         .hero__subhead {
+          display: block;
+          width: max-content;
           max-width: none;
-          white-space: nowrap;
           margin: 26px auto 0;
-          font-size: clamp(1rem, 1.35vw, 1.14rem);
-          line-height: 1.6;
-          letter-spacing: -0.01em;
+          padding: 0 24px;
+          font-size: clamp(0.9rem, 1.05vw, 1.05rem);
+          line-height: 1.5;
+          letter-spacing: -0.012em;
           color: color-mix(in srgb, var(--text) 62%, var(--bg));
-          text-wrap: pretty;
+          white-space: nowrap;
         }
         /* Pipeline — no boxed containers, just rules and type */
         .pipeline { padding: 28px 0 88px; }
@@ -729,10 +731,12 @@ export default function App() {
           }
 
           .hero__subhead {
+            width: auto;
             max-width: 34ch;
             white-space: normal;
-            margin-top: 20px;
-            font-size: 1rem;
+            margin-left: auto;
+            margin-right: auto;
+            padding: 0;
           }
           .pipeline__diagram { flex-direction: column; align-items: stretch; gap: 20px; }
           .pulse-line { width: 1px; height: 30px; margin: 0 auto; }
