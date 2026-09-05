@@ -409,27 +409,33 @@ export default function App() {
 
         /* Hero */
         .hero {
-          padding: 76px 0 92px 0;
+          min-height: 72vh;
+          display: flex;
+          align-items: center;
+          padding: 90px 0 58px;
           position: relative;
         }
         .hero__inner {
           position: relative;
           z-index: 1;
-          max-width: 1100px;
+          width: 100%;
+          max-width: 1280px;
           margin: 0 auto;
-          padding: 0 32px;
+          padding: 0 40px;
           text-align: center;
         }
         .hero__headline {
           font-family: 'Geist', sans-serif;
-          font-size: clamp(1.6rem, 3.4vw, 2.5rem);
-          font-weight: 700;
-          letter-spacing: -0.02em;
-          line-height: 1.22;
-          margin: 0;
+          font-size: clamp(2.8rem, 5.7vw, 5rem);
+          font-weight: 600;
+          letter-spacing: -0.045em;
+          line-height: 1.04;
+          margin: 0 auto;
+          max-width: 1180px;
+          text-wrap: balance;
         }
         /* Pipeline — no boxed containers, just rules and type */
-        .pipeline { padding: 64px 0; }
+        .pipeline { padding: 42px 0 88px; }
         .pipeline__diagram {
           margin-top: 40px;
           display: flex;
@@ -683,7 +689,7 @@ export default function App() {
         /* Mobile */
         @media (max-width: 880px) {
           .nav__links { gap: 18px; font-size: 0.86rem; }
-          .hero { padding: 52px 0 64px 0; }
+          .hero { min-height: 62vh; padding: 64px 0 42px; }
           .hero__headline { max-width: 100%; }
           .pipeline__diagram { flex-direction: column; align-items: stretch; gap: 20px; }
           .pulse-line { width: 1px; height: 30px; margin: 0 auto; }
