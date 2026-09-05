@@ -276,8 +276,7 @@ function Footer() {
         <div>
           <img src={FOOTER_MARK} alt="NerveNewt" className="footer__mark" />
           <p className="footer__tagline">
-            Building the interface between{" "}
-            <span className="footer__keep">biology and software.</span>
+            Building the interface between biology and software.
           </p>
         </div>
         <div className="footer__links">
@@ -674,12 +673,9 @@ export default function App() {
           margin-bottom: 24px;
         }
         .footer__mark { width: 44px; height: 44px; object-fit: contain; display: block; margin: 0 auto; }
-        .footer__keep {
-          white-space: nowrap;
-        }
-
         .footer__tagline {
           font-size: 0.88rem;
+          white-space: nowrap;
           color: color-mix(in srgb, var(--text) 55%, var(--bg));
           margin-top: 12px;
           max-width: 32ch;
@@ -709,6 +705,13 @@ export default function App() {
 
         /* Mobile */
         @media (max-width: 880px) {
+          .footer__tagline {
+            white-space: normal;
+            max-width: 32ch;
+            margin-left: auto;
+            margin-right: auto;
+            text-wrap: balance;
+          }
           .nav__links { gap: 18px; font-size: 0.86rem; }
           .hero {
             padding: 30px 0 58px;
