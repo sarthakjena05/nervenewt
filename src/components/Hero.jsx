@@ -25,9 +25,8 @@ export default function Hero({ onConnect }) {
         <br className="desktop-break" /> to your app <span>in minutes.</span>
       </h1>
       <p>
-        Building a meditation app, focus tool, or game? NerveNewt handles the
-        messy hardware and signal math so you can trigger real actions from
-        blinks, focus, and heartbeats.
+        A visual canvas and event layer that turns messy biosignals (EEG, EMG,
+        ECG) into clean triggers your app can listen to.
       </p>
       <div className="hero-note">
         Try blinks and closed eyes today. Focus, Calm, and heartbeat events are

@@ -6,7 +6,8 @@
   justify-content: space-between;
   gap: 16px;
   margin-bottom: 16px;
-  color: #7d847a;
+  color: #62695f;
+  font-weight: 600;
   font-size: 10px;
   letter-spacing: 1.3px;
 }
@@ -210,9 +211,11 @@
   color: #b77b53;
 }
 .action-chip[aria-pressed="true"] {
-  color: #a65830;
-  border-color: #efc5a6;
-  background: #fffbf5;
+  color: #88431f;
+  border-color: #b9774c;
+  background: #fff3e9;
+  box-shadow: 0 0 0 1px #b9774c;
+  font-weight: 600;
 }
 .action-chip:hover {
   border-color: #d6ae88;
@@ -955,4 +958,15 @@
     margin-left: 4px;
   }
 }
-.application-previews > .flight-panel { grid-area: auto; }
+.application-previews > .flight-panel {
+  grid-area: auto;
+}
+
+.access-form input:focus-visible,
+.access-form select:focus-visible,
+.early-access input:focus-visible {
+  outline: 1px solid #737373;
+  outline-offset: 2px;
+  border-color: #a3a3a3;
+}
+.action-chip[aria-pressed="true"]:hover { border-color: #b9774c; }

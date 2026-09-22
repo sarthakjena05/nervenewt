@@ -2,7 +2,7 @@ import React from "react";
 const FAQ_ITEMS = [
   {
     q: "Is NerveNewt available to use yet",
-    a: "Not publicly. We're early and currently prototyping the interface with consumer EEG hardware like Muse 2. What's on this page is the direction, not a shipped product.",
+    a: "You can try the browser demo today, with simulated signals or a Muse 2. The broader platform is in development. Request early access if you'd like to build with us.",
   },
   {
     q: "Do you make a headset",
@@ -10,7 +10,7 @@ const FAQ_ITEMS = [
   },
   {
     q: "What hardware will it support",
-    a: "We're starting with EEG and designing toward EMG, ECG, and EOG. Support is planned, not guaranteed for any specific device yet.",
+    a: "We're actively prototyping with the Muse 2 and expanding toward OpenBCI, with EMG and ECG on our roadmap. Request early access above if you're building with a specific device.",
   },
   {
     q: "Is this reading my thoughts or emotions",
