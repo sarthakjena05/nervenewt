@@ -10,7 +10,7 @@ const FAQ_ITEMS = [
   },
   {
     q: "What hardware will it support",
-    a: "We're actively prototyping with the Muse 2 and expanding toward OpenBCI, with EMG and ECG on our roadmap. Request early access above if you're building with a specific device.",
+    a: "We're actively prototyping with the Muse 2 and expanding toward OpenBCI, with EMG and ECG on our roadmap. Request early access above if you're building for a specific device.",
   },
   {
     q: "Is this reading my thoughts or emotions",

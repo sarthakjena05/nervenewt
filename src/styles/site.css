@@ -1027,3 +1027,19 @@ pre {
     font-size: 12px;
   }
 }
+.event-tokens {
+  display: flex;
+  gap: 8px;
+  padding: 16px 20px 0;
+}
+.event-tokens code {
+  font-size: 10px;
+  padding: 5px 8px;
+  background: #2b363c;
+  color: #c6d8c9;
+  border-radius: 4px;
+}
+.code-window pre {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}

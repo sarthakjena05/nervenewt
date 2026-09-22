@@ -93,17 +93,15 @@ export function DeveloperSection() {
           <span>your-app.js</span>
           <span>JAVASCRIPT</span>
         </div>
+        <div className="event-tokens" aria-label="Example events">
+          <code>alpha_power</code>
+          <code>blink</code>
+        </div>
         <pre>
           <code>
-            <span className="code-muted">
-              // Your next input isn't a button.
-            </span>
-            {"\n"}nervenewt.<span className="code-orange">on</span>(
-            <span className="code-green">"eyes_closed"</span>,{"\n"} (
-            {"{ confidence }"}) =&gt; {"{"}
-            {"\n"} player.<span className="code-orange">jump</span>();{"\n"}{" "}
-            {"}"}
-            {"\n"});
+            {
+              'stream.on("alpha_power", ({ power }) => updateFocusUI(power));\nstream.on("blink", () => triggerAction());'
+            }
           </code>
         </pre>
         <div className="code-foot">

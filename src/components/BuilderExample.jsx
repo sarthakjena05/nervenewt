@@ -2,7 +2,7 @@ import React, { useState, useRef } from "react";
 const prompt =
   "Connect to the NerveNewt stream at localhost:8080 and change the background color to green whenever 'calm' is triggered.";
 const code =
-  'newt.on("calm", () => playRelaxingSound());\nnewt.on("blink", () => nextPage());';
+  'stream.on("alpha_power", ({ power }) => updateFocusUI(power));\nstream.on("blink", () => triggerAction());';
 export default function BuilderExample() {
   const [tab, setTab] = useState(0);
   const buttons = useRef([]);
