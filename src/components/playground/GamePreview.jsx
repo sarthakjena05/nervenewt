@@ -18,7 +18,7 @@ function Newt({ purple }) {
   );
 }
 
-export default function GamePreview({ event, paused, signal, onTogglePause }) {
+export default function GamePreview({ event, paused, live, onTogglePause }) {
   const world = useRef(createGame({ demo: true }));
   const [game, setGame] = useState(world.current);
   const lastEvent = useRef(null);
@@ -141,9 +141,17 @@ export default function GamePreview({ event, paused, signal, onTogglePause }) {
         )}
       </div>
       <div className="flight-instructions">
-        <span>{paused ? "Paused" : "Autoplay · EEG controlled"}</span>
         <span>
-          {event ? event.name + " triggered" : "Listening to the signal"}
+          {paused
+            ? "Paused"
+            : live
+              ? "Live EEG controlled"
+              : "Autoplay · EEG controlled"}
+        </span>
+        <span>
+          {event
+            ? event.name + (event.live ? " triggered (Live EEG)" : " triggered")
+            : "Listening to the signal"}
         </span>
       </div>
     </div>

@@ -742,3 +742,28 @@
     padding-inline: 10px;
   }
 }
+.eeg-canvas {
+  display: block;
+  width: 100%;
+  height: 152px;
+  margin-top: 16px;
+}
+.device-connection {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+.connected-label {
+  font-size: 11px;
+  color: #467757;
+}
+@media (max-width: 500px) {
+  .connected-label {
+    font-size: 9px;
+  }
+  .eeg-header {
+    flex-wrap: wrap;
+  }
+}

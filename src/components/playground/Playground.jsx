@@ -8,7 +8,12 @@ import ActionPalette from "./ActionPalette";
 import useWorkflow from "./useWorkflow";
 import { INPUTS, DETECTORS } from "./registry";
 
-export default function Playground({ provider, onConnect }) {
+export default function Playground({
+  provider,
+  onConnect,
+  pairing,
+  onDisconnect,
+}) {
   const flow = useWorkflow(provider);
   const dropTarget = useRef(null);
   const [dropOver, setDropOver] = useState(false);
@@ -28,11 +33,30 @@ export default function Playground({ provider, onConnect }) {
           <div className="workspace-name">
             <Brand compact />
             <h2 id="playground-title">Your first flow</h2>
-            <span className="demo-badge">Demo · Simulated EEG</span>
+            <span className="demo-badge">
+              {provider.live
+                ? "Live Telemetry · Muse 2"
+                : "Demo · Simulated EEG"}
+            </span>
           </div>
-          <button className="connect-device" onClick={onConnect}>
-            ＋ Connect device
-          </button>
+          <div className="device-connection">
+            {provider.live ? (
+              <>
+                <span className="connected-label">● Muse 2 Connected</span>
+                <button className="connect-device" onClick={onDisconnect}>
+                  Disconnect
+                </button>
+              </>
+            ) : (
+              <button
+                className="connect-device"
+                onClick={onConnect}
+                disabled={pairing}
+              >
+                {pairing ? "Pairing Muse 2..." : "+ Connect device"}
+              </button>
+            )}
+          </div>
         </div>
         <div className="simple-playground">
           <div className="flow-builder">
@@ -45,14 +69,16 @@ export default function Playground({ provider, onConnect }) {
                 label="INPUT"
                 icon="∿"
                 title={INPUTS[0].name}
-                subtitle="Simulated EEG"
+                subtitle={
+                  provider.live ? "Live Web Bluetooth" : "Simulated EEG"
+                }
               />
               <Connection sequence={flow.sequence} />
               <WorkflowNode
                 label="WHEN"
                 icon={flow.detected ? "◡" : "◎"}
                 title={DETECTORS[0].name}
-                subtitle={flow.detected ? "Detected" : "Listening"}
+                subtitle={flow.detected ? "Triggered!" : "Listening"}
                 active={flow.detected}
               />
               <Connection sequence={flow.sequence} delay={175} />
@@ -73,16 +99,21 @@ export default function Playground({ provider, onConnect }) {
               onDragOverChange={setDropOver}
             />
             <p className="autoplay-note">
-              Runs automatically. Each EEG pulse triggers your action.
+              {provider.live
+                ? "Blink or close your eyes to trigger an action."
+                : "Runs automatically. Each EEG pulse triggers your action."}
             </p>
           </div>
           <GamePreview
+            live={!!provider.live}
             onTogglePause={flow.togglePause}
             event={flow.event}
             paused={flow.paused}
           />
           <div className="live-signal">
             <SignalPreview
+              live={!!provider.live}
+              drop={flow.frame.drop ?? 0}
               channels={flow.frame.channels}
               timestamp={flow.frame.timestamp}
               paused={flow.paused}

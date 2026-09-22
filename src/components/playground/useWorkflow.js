@@ -18,6 +18,7 @@ export default function useWorkflow(provider) {
   const [entries, setEntries] = useState([]);
   const actionRef = useRef(ACTIONS[0]);
   const pending = useRef(null);
+  const resetTrigger = useRef(null);
   const nextId = useRef(0);
 
   useEffect(() => {
@@ -34,51 +35,74 @@ export default function useWorkflow(provider) {
       if (message.type === "frame")
         setFrame((previous) => ({
           alpha: message.alpha,
-          samples: [...previous.samples.slice(1), message.sample],
+          samples: [...previous.samples.slice(1), message.sample ?? 0],
+          drop: message.drop ?? 0,
           channels: previous.channels.map((channel, index) =>
-            [...channel, ...(message.channels?.[index] ?? [])].slice(-768),
+            message.replace
+              ? (message.channels?.[index] ?? [])
+              : [...channel, ...(message.channels?.[index] ?? [])].slice(-768),
           ),
           timestamp: message.timestamp,
         }));
       if (message.type === "status")
         log(
           message.status === "connected"
-            ? "Simulated EEG connected"
+            ? provider.live
+              ? "Live Muse 2 connected"
+              : "Simulated EEG connected"
             : "Demo paused",
         );
-      if (message.type === "event" && message.name === "eyes_open") {
+      if (
+        message.type === "event" &&
+        ["eyes_open", "eyes.open"].includes(message.name)
+      ) {
         setDetected(false);
         setActionActive(false);
         log("Eyes open · back to baseline");
       }
-      if (message.type === "event" && message.name === "eyes_closed") {
+      if (
+        message.type === "event" &&
+        ["eyes_closed", "eyes.closed", "blink"].includes(message.name)
+      ) {
         setDetected(true);
+        clearTimeout(resetTrigger.current);
+        if (provider.live)
+          resetTrigger.current = setTimeout(() => {
+            setDetected(false);
+            setActionActive(false);
+            setEvent(null);
+          }, 700);
         setActionActive(false);
         setSequence((previous) => previous + 1);
-        log("Alpha increased · eyes_closed detected");
+        log(`${message.name} detected`);
         const selected = actionRef.current;
         clearTimeout(pending.current);
-        pending.current = setTimeout(() => {
-          const soundPlayed = selected.id !== "play_sound" || playTone();
-          setActionActive(true);
-          setEvent({
-            id: ++nextId.current,
-            action: selected.id,
-            name: selected.name,
-          });
-          log(
-            soundPlayed
-              ? `${selected.name} fired`
-              : "Sound unavailable · visual feedback fired",
-          );
-        }, 350);
+        pending.current = setTimeout(
+          () => {
+            const soundPlayed = selected.id !== "play_sound" || playTone();
+            setActionActive(true);
+            setEvent({
+              id: ++nextId.current,
+              action: selected.id,
+              name: selected.name,
+              live: !!provider.live,
+            });
+            log(
+              soundPlayed
+                ? `${selected.name} fired`
+                : "Sound unavailable · visual feedback fired",
+            );
+          },
+          provider.live ? 0 : 350,
+        );
       }
     });
-    provider.connect();
+    if (!provider.live) provider.connect();
     return () => {
       clearTimeout(pending.current);
+      clearTimeout(resetTrigger.current);
       unsubscribe();
-      provider.disconnect();
+      if (!provider.live) provider.disconnect();
     };
   }, [provider]);
 
@@ -92,6 +116,15 @@ export default function useWorkflow(provider) {
     if (id === "play_sound") unlockAudio();
   }
   function togglePause() {
+    if (provider.live) {
+      provider.setPaused(!paused);
+      clearTimeout(pending.current);
+      clearTimeout(resetTrigger.current);
+      setDetected(false);
+      setActionActive(false);
+      setPaused((previous) => !previous);
+      return;
+    }
     if (paused) provider.connect();
     else {
       clearTimeout(pending.current);

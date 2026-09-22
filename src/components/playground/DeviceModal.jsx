@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from "react";
 import Brand from "../Brand";
-export default function DeviceModal({ open, onClose, onSimulator }) {
+export default function DeviceModal({ open, onClose, onSimulator, message }) {
   const dialog = useRef(null);
   useEffect(() => {
     if (!open) return;
@@ -35,44 +35,17 @@ export default function DeviceModal({ open, onClose, onSimulator }) {
           ×
         </button>
       </div>
-      <div className="eyebrow">CHOOSE YOUR INPUT</div>
-      <h2 id="device-title">Connect a device.</h2>
-      <p>
-        Start with simulated signals. Real hardware connections are on the way.
-      </p>
-      <h3>EEG</h3>
+      <h2 id="device-title">Muse 2 connection</h2>
+      <p role="status">{message}</p>
       <button
-        className="device-option simulator-option"
+        className="button secondary"
         onClick={() => {
           onSimulator();
           onClose();
         }}
       >
-        <span>
-          <strong>Simulator</strong>
-          <small>Explore the Muse 2 workflow with simulated EEG</small>
-        </span>
-        <span className="device-tag">Use simulator →</span>
+        Continue with simulation
       </button>
-      {["Muse 2", "EMOTIV", "OpenBCI"].map((name) => (
-        <div className="device-option" key={name}>
-          <strong>{name}</strong>
-          <span className="device-tag">Coming Soon</span>
-        </div>
-      ))}
-      <h3>HEART</h3>
-      <div className="device-option">
-        <strong>Polar H10</strong>
-        <span className="device-tag">Coming Soon</span>
-      </div>
-      <h3>OTHER</h3>
-      <div className="device-option">
-        <strong>Apple Health</strong>
-        <span className="device-tag">Coming Soon</span>
-      </div>
-      <div className="modal-note">
-        Simulator available now. No physical device is connected.
-      </div>
     </dialog>
   );
 }

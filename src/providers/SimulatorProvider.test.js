@@ -1,7 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import { SimulatorProvider } from "./SimulatorProvider.js";
-import { MuseProvider } from "./MuseProvider.js";
 
 test("stream supplies four distinct dense EEG channels at 256 samples per second", () => {
   const provider = new SimulatorProvider({ autoplay: true });
@@ -76,9 +75,4 @@ test("connect is idempotent; disconnect stops frames; subscriptions clean up", a
   } finally {
     provider.disconnect();
   }
-});
-
-test("Muse placeholder never claims a hardware connection", () => {
-  const provider = new MuseProvider();
-  assert.throws(() => provider.connect(), /coming soon/);
 });
