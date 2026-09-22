@@ -1,11 +1,6 @@
 import React from "react";
-const sdkExample = `import { NerveNewt } from "@nervenewt/sdk";
-
-const stream = new NerveNewt({ device: "auto" });
-
-// Subscribe to normalized cross-hardware events
-stream.on("blink", ({ confidence }) => triggerUI());
-stream.on("alpha_power", ({ power }) => updateFocus(power));`;
+import EarlyAccess from "./EarlyAccess";
+import BuilderExample from "./BuilderExample";
 export function CTAButtons({ onConnect }) {
   return (
     <div className="cta-buttons">
@@ -22,30 +17,28 @@ export default function Hero({ onConnect }) {
   return (
     <section className="hero" id="top">
       <div className="eyebrow">
-        <span className="orange-dot" /> DEVELOPER INFRASTRUCTURE FOR BIOSIGNALS
+        <span className="orange-dot" />
+        Biosignals for everyone · Prototyping on Muse 2
       </div>
       <h1>
-        Build software that
-        <br />
-        responds to <span>you.</span>
+        Add biological inputs
+        <br className="desktop-break" /> to your app <span>in minutes.</span>
       </h1>
-      <figure className="hero-code">
-        <figcaption>
-          <span>Quick start</span>
-          <span>TypeScript</span>
-        </figcaption>
-        <pre tabIndex={0} aria-label="NerveNewt SDK usage example">
-          <code>{sdkExample}</code>
-        </pre>
-      </figure>
       <p>
-        Connect a biosensor. Define what you want to detect.{" "}
-        <br className="desktop-break" /> Connect it to an action.
+        Building a meditation app, focus tool, or game? NerveNewt handles the
+        messy hardware and signal math so you can trigger real actions from
+        blinks, focus, and heartbeats.
       </p>
-      <CTAButtons onConnect={onConnect} />
       <div className="hero-note">
-        A new kind of input. A familiar way to build.
+        Try blinks and closed eyes today. Focus, Calm, and heartbeat events are
+        planned.
       </div>
+      <EarlyAccess />
+      <BuilderExample />
+      <div className="hero-note">
+        You don’t need a neuroscience degree to build apps powered by your body.
+      </div>
+      <CTAButtons onConnect={onConnect} />
     </section>
   );
 }

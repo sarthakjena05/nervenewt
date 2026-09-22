@@ -35,16 +35,50 @@ export default async function handler(req, res) {
     typeof body.email === "string" ? body.email.trim().toLowerCase() : "";
   const hardware =
     typeof body.hardware === "string" ? body.hardware.trim() : "";
+  const emailOnly = body.signupType === "early-access";
   if (
     email.length > 254 ||
     !/^\S+@\S+\.\S+$/.test(email) ||
-    !hardware ||
+    (!emailOnly && !hardware) ||
     hardware.length > 120 ||
-    !TYPES.has(body.projectType)
+    (!emailOnly && !TYPES.has(body.projectType))
   )
     return res
       .status(400)
       .json({ error: "Enter a valid email, hardware, and project type." });
+  if (process.env.RESEND_API_KEY && process.env.WAITLIST_FROM) {
+    try {
+      const response = await fetch("https://api.resend.com/emails", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + process.env.RESEND_API_KEY,
+        },
+        body: JSON.stringify({
+          from: process.env.WAITLIST_FROM,
+          to: ["sarthak@nervenewt.com", "taban@nervenewt.com"],
+          subject: "New NerveNewt early-access request",
+          reply_to: email,
+          text: [
+            "Email: " + email,
+            "Hardware: " + (hardware || "Not specified"),
+            "Project: " +
+              (TYPES.has(body.projectType)
+                ? body.projectType
+                : "Not specified"),
+          ].join("\n"),
+        }),
+        signal: AbortSignal.timeout(8000),
+        redirect: "error",
+      });
+      if (!response.ok) throw new Error("Email service unavailable");
+      return res.status(201).json({ ok: true });
+    } catch {
+      return res
+        .status(502)
+        .json({ error: "Could not send your request. Please try again." });
+    }
+  }
   const endpoint = process.env.WAITLIST_WEBHOOK_URL;
   if (!endpoint)
     return res.status(503).json({
@@ -62,7 +96,7 @@ export default async function handler(req, res) {
       body: JSON.stringify({
         email,
         hardware,
-        projectType: body.projectType,
+        projectType: TYPES.has(body.projectType) ? body.projectType : null,
         source: "nervenewt-developer-access",
         createdAt: new Date().toISOString(),
       }),

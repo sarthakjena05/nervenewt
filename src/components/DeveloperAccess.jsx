@@ -37,7 +37,7 @@ export default function DeveloperAccess() {
     >
       <div className="access-heading">
         <div className="eyebrow">BUILD WITH NERVENEWT</div>
-        <h2 id="access-title">Get developer access.</h2>
+        <h2 id="access-title">Let’s build something together.</h2>
         <p>
           Tell us what you’re building and which hardware you use. Help shape
           the next integration.
@@ -62,7 +62,7 @@ export default function DeveloperAccess() {
             />
           </label>
           <label>
-            Primary hardware
+            Headset or wearable
             <input
               name="hardware"
               placeholder="Muse 2, EMG wristband, Polar H10…"
@@ -95,7 +95,7 @@ export default function DeveloperAccess() {
             </label>
           </div>
           <button className="button primary" disabled={state === "sending"}>
-            {state === "sending" ? "Saving…" : "Join developer waitlist"}
+            {state === "sending" ? "Saving…" : "Get Early Access"}
           </button>
           <p className="access-privacy">
             We’ll use these details to contact you about developer access and

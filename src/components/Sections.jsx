@@ -4,19 +4,16 @@ import { CTAButtons } from "./Hero";
 export function DeveloperPipeline() {
   const steps = [
     {
-      title: "01 / Auto-Discovery",
-      body: "Connect over Web Bluetooth or serial with zero config.",
-      code: 'const stream = await NerveNewt.connect("muse-2");',
+      title: "01 / Connect",
+      body: "Pair your headset over Bluetooth in one click, or use our in-browser simulator if you don’t own hardware yet.",
     },
     {
-      title: "02 / Normalized Events",
-      body: "Subscribe to clean, standardized physiological states.",
-      code: 'stream.on("alpha_burst", ({ power }) => ...);',
+      title: "02 / Pick a Signal",
+      body: "Choose high-level events your app cares about: Focus, Calm, Blinks, or Closed Eyes. Zero signal processing required.",
     },
     {
-      title: "03 / App Logic",
-      body: "Drive UI, game mechanics, or adaptive audio with zero latency.",
-      code: "ui.setFocusState(power > 0.7);",
+      title: "03 / Hook Up Your App",
+      body: "Feed the event into your game, web app, or vibe-coding prompt (Cursor / Replit) with just a couple of lines.",
     },
   ];
   return (
@@ -26,13 +23,13 @@ export function DeveloperPipeline() {
       aria-labelledby="pipeline-title"
     >
       <header className="pipeline-heading">
-        <div className="eyebrow">DEVELOPER PIPELINE</div>
+        <div className="eyebrow">HOW IT WORKS</div>
         <h2 id="pipeline-title">
-          From raw signal to application event in 3 lines.
+          Connect. Pick a signal. Make something happen.
         </h2>
         <p>
-          Skip device-specific serial parsers and Bluetooth boilerplate.
-          NerveNewt ingests messy telemetry and emits clean, typed events.
+          Start with a headset or the simulator. Bring your idea; we’ll handle
+          the signals.
         </p>
       </header>
       <div className="pipeline-grid">
@@ -40,12 +37,13 @@ export function DeveloperPipeline() {
           <article className="pipeline-card" key={step.title}>
             <h3>{step.title}</h3>
             <p>{step.body}</p>
-            <pre>
-              <code>{step.code}</code>
-            </pre>
           </article>
         ))}
       </div>
+      <p className="pipeline-note">
+        Blinks and Closed Eyes work in the demo. Focus, Calm, and app
+        integrations are the direction we’re building toward.
+      </p>
     </section>
   );
 }
@@ -191,7 +189,7 @@ export function HardwareRoadmap() {
           [
             "ECG / PPG",
             "Planned",
-            "Cardiac and optical signals → continuous autonomic telemetry for adaptive applications.",
+            "Cardiac and optical signals → heart and recovery signals for apps that respond to you.",
           ],
         ].map(([name, status, body]) => (
           <article key={name}>

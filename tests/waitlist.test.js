@@ -103,3 +103,39 @@ test("new project types pass validation and reach storage unchanged", async () =
     else process.env.WAITLIST_WEBHOOK_URL = endpoint;
   }
 });
+
+test("email-only signup sends notifications to both founders", async () => {
+  const original = globalThis.fetch;
+  process.env.RESEND_API_KEY = "test-key";
+  process.env.WAITLIST_FROM = "verified@example.com";
+  try {
+    let message;
+    globalThis.fetch = async (url, options) => {
+      assert.equal(url, "https://api.resend.com/emails");
+      message = JSON.parse(options.body);
+      return { ok: true };
+    };
+    let r = response();
+    await handler(
+      request({ email: valid.email, signupType: "early-access" }),
+      r,
+    );
+    assert.equal(r.code, 201);
+    assert.deepEqual(message.to, [
+      "sarthak@nervenewt.com",
+      "taban@nervenewt.com",
+    ]);
+    assert.equal(message.reply_to, "developer@example.com");
+    globalThis.fetch = async () => ({ ok: false });
+    r = response();
+    await handler(
+      request({ email: valid.email, signupType: "early-access" }),
+      r,
+    );
+    assert.equal(r.code, 502);
+  } finally {
+    globalThis.fetch = original;
+    delete process.env.RESEND_API_KEY;
+    delete process.env.WAITLIST_FROM;
+  }
+});
