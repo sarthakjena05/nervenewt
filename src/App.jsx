@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Brand from "./components/Brand";
 import Hero from "./components/Hero";
+import FAQ from "./components/FAQ";
 import {
   BodyInput,
   HowItWorks,
@@ -15,6 +16,7 @@ import DeviceModal from "./components/playground/DeviceModal";
 import { SimulatorProvider } from "./providers/SimulatorProvider";
 import "./styles/site.css";
 import "./styles/playground.css";
+import "./styles/dark.css";
 
 export default function App() {
   const [deviceOpen, setDeviceOpen] = useState(false);
@@ -50,6 +52,7 @@ export default function App() {
         <DeveloperSection />
         <Integrations />
         <Validation />
+        <FAQ />
         <FinalCTA onConnect={openDevices} />
       </main>
       <footer className="site-footer container">

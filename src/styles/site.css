@@ -180,6 +180,36 @@ pre {
   font-size: 16px;
   line-height: 1.7;
 }
+.hero-code {
+  width: min(100%, 640px);
+  margin: 28px auto;
+  text-align: left;
+  background: #171e24;
+  color: #e1e7e4;
+  border: 1px solid #303a42;
+  border-radius: 12px;
+  overflow: hidden;
+}
+.hero-code figcaption {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 16px 22px 0;
+  color: #9ca9b0;
+  font-size: 10px;
+}
+.hero-code pre {
+  margin: 0;
+  padding: 20px 22px 24px;
+  font-size: clamp(10px, 1.05vw, 12px);
+  line-height: 1.85;
+  overflow-x: auto;
+  tab-size: 2;
+}
+.hero-code pre:focus-visible {
+  outline: 2px solid var(--orange);
+  outline-offset: -3px;
+}
 .cta-buttons {
   display: flex;
   justify-content: center;

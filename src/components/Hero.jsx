@@ -1,4 +1,11 @@
 import React from "react";
+const sdkExample = `import { NerveNewt } from "@nervenewt/sdk";
+
+const stream = new NerveNewt({ device: "auto" });
+
+// Subscribe to normalized cross-hardware events
+stream.on("blink", ({ confidence }) => triggerUI());
+stream.on("alpha_power", ({ power }) => updateFocus(power));`;
 export function CTAButtons({ onConnect }) {
   return (
     <div className="cta-buttons">
@@ -22,6 +29,15 @@ export default function Hero({ onConnect }) {
         <br />
         responds to <span>you.</span>
       </h1>
+      <figure className="hero-code">
+        <figcaption>
+          <span>Quick start</span>
+          <span>TypeScript</span>
+        </figcaption>
+        <pre tabIndex={0} aria-label="NerveNewt SDK usage example">
+          <code>{sdkExample}</code>
+        </pre>
+      </figure>
       <p>
         Connect a biosensor. Define what you want to detect.{" "}
         <br className="desktop-break" /> Connect it to an action.

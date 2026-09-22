@@ -1,0 +1,175 @@
+:root {
+  color-scheme: dark;
+  background: #101519;
+  color: #e6ebe7;
+  --muted: #a0aca7;
+}
+p,
+.muted {
+  color: #a0aca7;
+}
+.site-header nav,
+.hero .eyebrow,
+.contact-link {
+  color: #b2bcb7;
+}
+.hero-note,
+.section .eyebrow,
+.site-footer > span,
+.site-footer > small,
+.validation span,
+.platform-list small {
+  color: #96a29c;
+}
+.secondary {
+  border-color: #3c4846;
+  color: #e6ebe7;
+}
+.secondary:hover {
+  background: #202a2d;
+}
+.hero-code {
+  background: #151d22;
+  border-color: #303c42;
+}
+.playground {
+  background: #171f24;
+  color: #e6ebe7;
+  box-shadow: none;
+}
+.playground-intro,
+.connect-device,
+.flow-label,
+.flow-subtitle,
+.autoplay-note,
+.action-library > p,
+.action-library strong,
+.flight-heading,
+.flight-heading button,
+.flight-instructions {
+  color: #a2afa8;
+}
+.demo-badge {
+  background: #30271f;
+  color: #e1b793;
+}
+.flow-block {
+  background: #202a2d;
+}
+.flow-icon {
+  color: #a9bbb0;
+}
+.flow-column:last-child .flow-block {
+  background: #34281f;
+}
+.flow-block.is-active,
+.flow-block.is-drop-target {
+  background: #3b2c22;
+  border-color: #b78157;
+}
+.action-chip {
+  background: #1c262a;
+  border-color: #36423f;
+  color: #c1cdc5;
+}
+.action-chip[aria-pressed="true"] {
+  background: #33281f;
+  border-color: #996d4c;
+  color: #edbd97;
+}
+.eeg-monitor {
+  background: #111a1f;
+}
+.eeg-header strong {
+  color: #d7e1da;
+}
+.eeg-source,
+.eeg-live time,
+.eeg-axis,
+.eeg-footer {
+  color: #99a99f;
+}
+.eeg-live {
+  color: #9ac9ab;
+}
+.eeg-channel svg path {
+  stroke: #2b3639;
+}
+.eeg-alpha {
+  background: #293536;
+}
+.flight-stage {
+  background: #182328;
+}
+.flight-stage svg > rect:first-child {
+  fill: #182328;
+}
+.flight-stage svg > path {
+  stroke: #35473f;
+}
+.flight-stage svg > g[fill="#cfddbf"] {
+  fill: #3f574a;
+  stroke: #617e62;
+}
+.flight-stage svg > rect[y="296"] {
+  fill: #2b3b31;
+}
+.flight-stage svg > text {
+  fill: #a8b9a3;
+}
+.flight-overlay {
+  background: #182328ed;
+  color: #dce6dc;
+}
+.device-modal,
+.skip-link {
+  background: #172126;
+  color: #e6ebe7;
+}
+.device-option {
+  border-color: #35413c;
+}
+.simulator-option {
+  background: #30271f;
+  border-color: #8c684d;
+}
+.device-tag,
+.modal-note,
+.simulator-option small {
+  color: #a5b2a9;
+}
+.close-button {
+  border-color: #52605b;
+}
+.faq {
+  max-width: 700px;
+  margin-inline: auto;
+}
+.faq h2 {
+  text-align: center;
+}
+.faq-list {
+  margin-top: 28px;
+}
+.faq details {
+  padding: 14px 0;
+}
+.faq summary {
+  cursor: pointer;
+  font-size: 15px;
+  line-height: 1.6;
+  color: #d6dfd9;
+}
+.faq summary::marker {
+  color: #bd865f;
+}
+.faq summary:focus-visible {
+  outline: 2px solid var(--orange);
+  outline-offset: 6px;
+  border-radius: 2px;
+}
+.faq details p {
+  padding: 12px 0 0 19px;
+  font-size: 13px;
+  max-width: 65ch;
+}
