@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import Brand from "./components/Brand";
 import Hero from "./components/Hero";
+import DeveloperAccess from "./components/DeveloperAccess";
 import FAQ from "./components/FAQ";
 import {
   DeveloperPipeline,
@@ -8,7 +9,7 @@ import {
   DeveloperSection,
   Integrations,
   Validation,
-  FinalCTA,
+  HardwareRoadmap,
 } from "./components/Sections";
 import Playground from "./components/playground/Playground";
 import DeviceModal from "./components/playground/DeviceModal";
@@ -85,8 +86,8 @@ export default function App() {
           <a href="#how-it-works">How it works</a>
           <a href="#developers">Developers</a>
         </nav>
-        <a className="contact-link" href="mailto:founders@nervenewt.com">
-          Let’s talk <span>↗</span>
+        <a className="contact-link" href="#developer-access">
+          Developer access <span>↗</span>
         </a>
       </header>
       <main className="container">
@@ -101,17 +102,18 @@ export default function App() {
         <DeveloperPipeline />
         <Examples />
         <DeveloperSection />
+        <HardwareRoadmap />
         <Integrations />
         <Validation />
         <FAQ />
-        <FinalCTA onConnect={openDevices} />
+        <DeveloperAccess />
       </main>
       <footer className="site-footer container">
         <a href="#top" aria-label="NerveNewt home">
           <Brand />
         </a>
         <span>Building the interface between biology and software.</span>
-        <a href="mailto:founders@nervenewt.com">Get in touch ↗</a>
+        <a href="#developer-access">Developer access ↗</a>
         <small>© 2026 NerveNewt</small>
       </footer>
       <DeviceModal

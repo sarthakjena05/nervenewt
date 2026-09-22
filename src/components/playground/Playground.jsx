@@ -2,6 +2,7 @@ import React, { useRef, useState } from "react";
 import Brand from "../Brand";
 import WorkflowNode, { Connection } from "./WorkflowNode";
 import SignalPreview from "./SignalPreview";
+import FocusPreview from "./FocusPreview";
 import GamePreview from "./GamePreview";
 
 import ActionPalette from "./ActionPalette";
@@ -62,7 +63,7 @@ export default function Playground({
           <div className="flow-builder">
             <div className="builder-heading">
               <h3>A signal. An action.</h3>
-              <p>The signal plays. The newt flaps.</p>
+              <p>One signal stream. Two application behaviors.</p>
             </div>
             <div className="workflow">
               <WorkflowNode
@@ -104,12 +105,19 @@ export default function Playground({
                 : "Runs automatically. Each EEG pulse triggers your action."}
             </p>
           </div>
-          <GamePreview
-            live={!!provider.live}
-            onTogglePause={flow.togglePause}
-            event={flow.event}
-            paused={flow.paused}
-          />
+          <div className="application-previews">
+            <GamePreview
+              live={!!provider.live}
+              onTogglePause={flow.togglePause}
+              event={flow.event}
+              paused={flow.paused}
+            />
+            <FocusPreview
+              alpha={flow.frame.alpha}
+              live={!!provider.live}
+              paused={flow.paused}
+            />
+          </div>
           <div className="live-signal">
             <SignalPreview
               live={!!provider.live}

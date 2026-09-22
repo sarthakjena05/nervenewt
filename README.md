@@ -50,3 +50,9 @@ Manually check automatic flight and visible waveform on load, dragging action ch
 The existing Vite 5 / esbuild development dependencies report one high and one moderate advisory in `npm audit`. A toolchain upgrade is a separate follow-up; the local preview is bound to loopback.
 
 Hardware acceptance: pair a powered Muse 2; check all four traces move, blink/close eyes for action feedback, pause/resume, disconnect/reconnect, switch the headset off to check fallback, and reject the chooser to check cancellation. Protocol reference: https://github.com/urish/muse-js/blob/master/src/muse.spec.ts
+
+## Developer access submissions
+
+`api/waitlist.js` is a Vercel serverless POST endpoint. Configure `WAITLIST_WEBHOOK_URL` to an HTTPS endpoint that durably stores JSON records; optional `WAITLIST_WEBHOOK_TOKEN` adds a server-only Bearer header. Records contain email, hardware, projectType, source, and createdAt. No biosignal data is sent. The endpoint validates fields and same-origin requests and includes a honeypot. Configure durable rate limits/spam protection at the chosen intake service. The browser only shows success after that service acknowledges the record; absent configuration returns 503.
+
+The endpoint is not served by plain Vite dev. Use the deployed Vercel function or Vercel dev for full form integration. Run `node --test tests/waitlist.test.js` for request validation and delivery-path tests. Before enabling signups, configure the intake service and verify an authorized test record appears in storage. Do not put intake credentials in VITE_* variables.

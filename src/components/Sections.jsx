@@ -161,3 +161,50 @@ export function FinalCTA({ onConnect }) {
     </section>
   );
 }
+export function HardwareRoadmap() {
+  return (
+    <section
+      className="hardware-roadmap section"
+      aria-labelledby="roadmap-title"
+    >
+      <header className="pipeline-heading">
+        <div className="eyebrow">EEG IS THE STARTING POINT</div>
+        <h2 id="roadmap-title">Built toward the next wearable inputs.</h2>
+        <p>
+          The expansion path moves from consumer EEG into gesture control for XR
+          and smart glasses, then continuous autonomic telemetry from everyday
+          wearables.
+        </p>
+      </header>
+      <div className="roadmap-grid">
+        {[
+          [
+            "EEG",
+            "Available in this demo",
+            "Muse 2 signals → browser interactions. A concrete starting point for the event interface.",
+          ],
+          [
+            "EMG",
+            "Planned",
+            "Muscle activity → gesture events for XR, smart glasses, and hands-free interaction.",
+          ],
+          [
+            "ECG / PPG",
+            "Planned",
+            "Cardiac and optical signals → continuous autonomic telemetry for adaptive applications.",
+          ],
+        ].map(([name, status, body]) => (
+          <article key={name}>
+            <span className="roadmap-status">{status}</span>
+            <h3>{name}</h3>
+            <p>{body}</p>
+          </article>
+        ))}
+      </div>
+      <p className="roadmap-note">
+        EMG and ECG/PPG integrations are in the roadmap; device coverage and
+        release dates are not yet committed.
+      </p>
+    </section>
+  );
+}

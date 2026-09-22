@@ -767,3 +767,192 @@
     flex-wrap: wrap;
   }
 }
+.application-previews {
+  grid-area: game;
+  align-self: center;
+  min-width: 0;
+  display: grid;
+  gap: 24px;
+}
+.focus-preview {
+  background: #f7f8f4;
+  border: 1px solid #e2e6db;
+  border-radius: 14px;
+  padding: 18px;
+}
+.focus-heading,
+.focus-state,
+.focus-metric {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.focus-heading {
+  font-size: 8px;
+  color: #7b8777;
+  letter-spacing: 0.8px;
+}
+.focus-state {
+  margin: 14px 0;
+}
+.focus-state h3 {
+  font-size: 16px;
+}
+.focus-state > span {
+  font-size: 9px;
+  color: #677b60;
+}
+.focus-document {
+  padding: 18px;
+  background: #fff;
+  border-radius: 8px;
+}
+.focus-context {
+  font-size: 9px;
+  color: #889080;
+}
+.focus-document h4 {
+  margin: 14px 0 8px;
+  font-size: 14px;
+  font-weight: 500;
+}
+.focus-document p {
+  font-size: 11px;
+  line-height: 1.7;
+}
+.focus-secondary {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 18px;
+  color: #838c7d;
+  font-size: 9px;
+  min-height: 14px;
+}
+.focus-active .focus-secondary {
+  visibility: hidden;
+}
+.focus-active .focus-document {
+  box-shadow: inset 3px 0 #c4d2b4;
+}
+.focus-metric {
+  margin-top: 14px;
+  font-size: 10px;
+  color: #728069;
+}
+.focus-metric code {
+  font-size: 9px;
+}
+.focus-note {
+  font-size: 9px;
+  margin-top: 12px;
+}
+.roadmap-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 28px;
+}
+.roadmap-status {
+  font-size: 9px;
+  color: #9b7756;
+}
+.roadmap-grid h3 {
+  margin: 10px 0;
+}
+.roadmap-grid p {
+  font-size: 13px;
+}
+.roadmap-note {
+  font-size: 10px !important;
+  text-align: center;
+  margin-top: 24px;
+}
+.developer-access {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 64px;
+  max-width: 940px;
+  margin-inline: auto;
+  scroll-margin-top: 24px;
+}
+.access-heading p {
+  margin-top: 18px;
+}
+.access-form {
+  display: grid;
+  gap: 16px;
+  min-width: 0;
+}
+.access-form label {
+  display: grid;
+  gap: 8px;
+  font-size: 12px;
+  color: #52604f;
+}
+.access-form input,
+.access-form select {
+  font: inherit;
+  padding: 12px;
+  background: #fff;
+  color: #14202a;
+  border: 1px solid #d7ddd1;
+  border-radius: 6px;
+  width: 100%;
+  min-width: 0;
+}
+.access-form input:focus-visible {
+  outline: 2px solid #ec773e;
+  outline-offset: 2px;
+}
+.access-form .access-privacy {
+  font-size: 10px;
+}
+.access-form .access-error {
+  font-size: 12px;
+  color: #9d3a25;
+}
+.access-trap {
+  position: absolute;
+  left: -10000px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+.access-success {
+  padding: 24px;
+  background: #eef3e8;
+  border-radius: 12px;
+}
+.access-success p {
+  margin-top: 12px;
+}
+@media (max-width: 800px) {
+  .roadmap-grid,
+  .developer-access {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+  .access-heading {
+    text-align: center;
+  }
+  .roadmap-grid article {
+    max-width: 540px;
+    margin-inline: auto;
+    width: 100%;
+  }
+  .application-previews {
+    gap: 20px;
+  }
+}
+@media (max-width: 500px) {
+  .site-header .contact-link {
+    max-width: 80px;
+    text-align: right;
+  }
+  .site-header .contact-link span {
+    margin-left: 4px;
+  }
+}
+.application-previews > .flight-panel { grid-area: auto; }
