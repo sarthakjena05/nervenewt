@@ -75,21 +75,21 @@ export default function Playground({ provider, onConnect }) {
             <p className="autoplay-note">
               Runs automatically. Each EEG pulse triggers your action.
             </p>
-            <div className="live-signal">
-              <SignalPreview
-                channels={flow.frame.channels}
-                timestamp={flow.frame.timestamp}
-                paused={flow.paused}
-                alpha={flow.frame.alpha}
-                detected={flow.detected}
-              />
-            </div>
           </div>
           <GamePreview
             onTogglePause={flow.togglePause}
             event={flow.event}
             paused={flow.paused}
           />
+          <div className="live-signal">
+            <SignalPreview
+              channels={flow.frame.channels}
+              timestamp={flow.frame.timestamp}
+              paused={flow.paused}
+              alpha={flow.frame.alpha}
+              detected={flow.detected}
+            />
+          </div>
         </div>
       </div>
     </section>

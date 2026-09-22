@@ -62,11 +62,13 @@
 .simple-playground {
   display: grid;
   grid-template-columns: 1.05fr 1fr;
-  gap: 42px;
+  grid-template-areas: "builder game" "signal game";
+  gap: 24px 42px;
   align-items: start;
   padding: 38px 0 20px;
 }
 .flow-builder {
+  grid-area: builder;
   min-width: 0;
 }
 .builder-heading h3 {
@@ -181,12 +183,14 @@
   color: #697364;
 }
 .action-chips {
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 7px;
   flex-wrap: wrap;
   margin-top: 11px;
 }
 .action-chip {
+  justify-content: center;
   display: inline-flex;
   align-items: center;
   gap: 7px;
@@ -287,6 +291,8 @@
   color: #aa6c45;
 }
 .flight-panel {
+  grid-area: game;
+  align-self: center;
   min-width: 0;
   padding-top: 4px;
 }
@@ -461,6 +467,7 @@
 @media (max-width: 800px) {
   .simple-playground {
     grid-template-columns: 1fr;
+    grid-template-areas: "builder" "game" "signal";
     gap: 30px;
   }
   .flight-panel {
@@ -596,7 +603,37 @@
   line-height: 1.6;
 }
 .live-signal {
-  margin-top: 18px;
+  grid-area: signal;
+  min-width: 0;
+}
+@media (max-width: 500px) {
+  .builder-heading,
+  .autoplay-note,
+  .action-library > p {
+    text-align: center;
+  }
+  .action-chips {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .action-chip {
+    min-height: 40px;
+  }
+  .flow-block {
+    text-align: center;
+  }
+  .flow-label {
+    text-align: center;
+    margin-left: 0;
+  }
+  .flow-block h3 {
+    min-height: 2.6em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .flight-panel {
+    padding-top: 0;
+  }
 }
 .flight-stage[role="img"] {
   cursor: default;

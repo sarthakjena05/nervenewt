@@ -162,8 +162,7 @@ export function FinalCTA({ onConnect }) {
     <section className="final-cta section">
       <div className="eyebrow">LET’S BUILD SOMETHING HUMAN</div>
       <h2>
-        What would you build if
-        <br />
+        What would you build if <br />
         software could understand you?
       </h2>
       <CTAButtons onConnect={onConnect} />
