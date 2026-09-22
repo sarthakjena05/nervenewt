@@ -1,57 +1,49 @@
 import React from "react";
-import Brand from "./Brand";
+
 import { CTAButtons } from "./Hero";
-export function BodyInput() {
+export function DeveloperPipeline() {
+  const steps = [
+    {
+      title: "01 / Auto-Discovery",
+      body: "Connect over Web Bluetooth or serial with zero config.",
+      code: 'const stream = await NerveNewt.connect("muse-2");',
+    },
+    {
+      title: "02 / Normalized Events",
+      body: "Subscribe to clean, standardized physiological states.",
+      code: 'stream.on("alpha_burst", ({ power }) => ...);',
+    },
+    {
+      title: "03 / App Logic",
+      body: "Drive UI, game mechanics, or adaptive audio with zero latency.",
+      code: "ui.setFocusState(power > 0.7);",
+    },
+  ];
   return (
-    <section className="body-section section" id="overview">
-      <div>
-        <div className="eyebrow">BEYOND THE KEYBOARD</div>
-        <h2>Your body is an input.</h2>
+    <section
+      className="developer-pipeline section"
+      id="how-it-works"
+      aria-labelledby="pipeline-title"
+    >
+      <header className="pipeline-heading">
+        <div className="eyebrow">DEVELOPER PIPELINE</div>
+        <h2 id="pipeline-title">
+          From raw signal to application event in 3 lines.
+        </h2>
         <p>
-          Software understands clicks, taps, keyboards and controllers.
-          NerveNewt lets it understand physiological signals too.
+          Skip device-specific serial parsers and Bluetooth boilerplate.
+          NerveNewt ingests messy telemetry and emits clean, typed events.
         </p>
-      </div>
-      <div
-        className="body-diagram"
-        aria-label="Human to EEG, ECG and PPG to NerveNewt to any application"
-      >
-        <span className="human-icon" aria-hidden="true">
-          ◎
-        </span>
-        <span>Human</span>
-        <i>↓</i>
-        <span className="mono muted">EEG · ECG · PPG</span>
-        <i>↓</i>
-        <Brand />
-        <i>↓</i>
-        <span>
-          Any Application <span className="orange">↗</span>
-        </span>
-      </div>
-    </section>
-  );
-}
-export function HowItWorks() {
-  return (
-    <section className="section" id="how-it-works">
-      <div className="eyebrow">THREE STEPS. ENDLESS POSSIBILITIES.</div>
-      <h2>From signal to behavior in minutes.</h2>
-      <div className="steps">
-        {[
-          ["01", "Connect", "Connect a supported biosensor."],
-          [
-            "02",
-            "Define",
-            "Choose the physiological event your application should understand.",
-          ],
-          ["03", "Build", "Connect it to application behavior."],
-        ].map(([n, title, body]) => (
-          <div key={n}>
-            <span className="step-number">{n}</span>
-            <h3>{title}</h3>
-            <p>{body}</p>
-          </div>
+      </header>
+      <div className="pipeline-grid">
+        {steps.map((step) => (
+          <article className="pipeline-card" key={step.title}>
+            <h3>{step.title}</h3>
+            <p>{step.body}</p>
+            <pre>
+              <code>{step.code}</code>
+            </pre>
+          </article>
         ))}
       </div>
     </section>

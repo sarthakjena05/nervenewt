@@ -3,8 +3,7 @@ import Brand from "./components/Brand";
 import Hero from "./components/Hero";
 import FAQ from "./components/FAQ";
 import {
-  BodyInput,
-  HowItWorks,
+  DeveloperPipeline,
   Examples,
   DeveloperSection,
   Integrations,
@@ -16,7 +15,6 @@ import DeviceModal from "./components/playground/DeviceModal";
 import { SimulatorProvider } from "./providers/SimulatorProvider";
 import "./styles/site.css";
 import "./styles/playground.css";
-
 
 export default function App() {
   const [deviceOpen, setDeviceOpen] = useState(false);
@@ -46,8 +44,7 @@ export default function App() {
       <main className="container">
         <Hero onConnect={openDevices} />
         <Playground key={session} provider={provider} onConnect={openDevices} />
-        <BodyInput />
-        <HowItWorks />
+        <DeveloperPipeline />
         <Examples />
         <DeveloperSection />
         <Integrations />
