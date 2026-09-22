@@ -16,7 +16,7 @@ import DeviceModal from "./components/playground/DeviceModal";
 import { SimulatorProvider } from "./providers/SimulatorProvider";
 import "./styles/site.css";
 import "./styles/playground.css";
-import "./styles/dark.css";
+
 
 export default function App() {
   const [deviceOpen, setDeviceOpen] = useState(false);

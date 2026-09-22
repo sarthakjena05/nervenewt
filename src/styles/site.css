@@ -842,3 +842,36 @@ pre {
     transition: none !important;
   }
 }
+
+.faq {
+  max-width: 700px;
+  margin-inline: auto;
+}
+.faq h2 {
+  text-align: center;
+}
+.faq-list {
+  margin-top: 28px;
+}
+.faq details {
+  padding: 14px 0;
+}
+.faq summary {
+  cursor: pointer;
+  font-size: 15px;
+  line-height: 1.6;
+  color: #14202a;
+}
+.faq summary::marker {
+  color: #bd865f;
+}
+.faq summary:focus-visible {
+  outline: 2px solid var(--orange);
+  outline-offset: 6px;
+  border-radius: 2px;
+}
+.faq details p {
+  padding: 12px 0 0 19px;
+  font-size: 13px;
+  max-width: 65ch;
+}
