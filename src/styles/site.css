@@ -1043,3 +1043,76 @@ pre {
   white-space: pre-wrap;
   overflow-wrap: anywhere;
 }
+.docs-page {
+  max-width: 860px;
+  padding-block: 48px 80px;
+}
+.docs-page h1 {
+  font-size: clamp(34px, 5vw, 54px);
+  letter-spacing: -2px;
+  margin: 16px 0 22px;
+}
+.docs-page h2 {
+  font-size: 28px;
+  letter-spacing: -0.8px;
+  margin-bottom: 20px;
+}
+.docs-page h3 {
+  font-size: 18px;
+  margin: 24px 0 12px;
+}
+.docs-page section {
+  padding-top: 48px;
+  scroll-margin-top: 24px;
+}
+.docs-page p,
+.docs-page li,
+.docs-page dd {
+  font-size: 14px;
+  line-height: 1.8;
+}
+.docs-page p + p {
+  margin-top: 16px;
+}
+.docs-page a {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+.docs-toc {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-top: 26px;
+  font-size: 12px;
+}
+.docs-page pre {
+  background: #171e24;
+  color: #e1e7e4;
+  border-radius: 10px;
+  padding: 22px;
+  font-size: 12px;
+  line-height: 1.8;
+  overflow-x: auto;
+}
+.docs-page table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+  margin-bottom: 18px;
+}
+.docs-page td,
+.docs-page th {
+  text-align: left;
+  padding: 14px 12px;
+  border-bottom: 1px solid #dadfd4;
+  line-height: 1.7;
+  vertical-align: top;
+}
+.docs-page dt {
+  margin-top: 18px;
+  font-size: 13px;
+}
+.docs-page dd {
+  margin: 8px 0 0;
+  color: #777c7d;
+}

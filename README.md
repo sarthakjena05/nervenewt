@@ -58,3 +58,9 @@ Hardware acceptance: pair a powered Muse 2; check all four traces move, blink/cl
 The endpoint is not served by plain Vite dev. Use the deployed Vercel function or Vercel dev for full form integration. Run `node --test tests/waitlist.test.js` for request validation and delivery-path tests. Before enabling signups, configure the intake service and verify an authorized test record appears in storage. Do not put intake credentials in VITE_* variables.
 
 Email-first signup: configure server-only `RESEND_API_KEY` and `WAITLIST_FROM` (a verified sender) in Vercel to route notifications to sarthak@nervenewt.com and taban@nervenewt.com. When configured, Resend is the intake destination and receives the optional hardware/project answers too. Existing webhook intake remains the fallback when email delivery is not configured. No success is reported without provider acknowledgement. Email delivery has not been verified with live credentials. Reference: https://resend.com/docs/api-reference/emails/send-email
+
+## Prerendering and docs
+
+`npm run build` builds the browser assets, builds a temporary server renderer in `.prerender/`, and renders `/` and `/docs/` into static HTML in `dist`. React hydrates that same markup in the browser. Both routes include canonical URLs, Open Graph/Twitter metadata, and the social preview PNG. The build also generates robots.txt and sitemap.xml. No server runtime is needed to read either page. Do not deploy the initial Vite output before the prerender step completes.
+
+Verify after build with `node --test tests/prerender.test.js`. Production-preview checks should cover hydration, the simulator/action buttons, and direct navigation to `/docs/`. Traction numbers are withheld from the page until reconfirmed; public team credentials still need owner-provided source material.

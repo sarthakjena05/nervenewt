@@ -1,11 +1,9 @@
 import React from "react";
-import EarlyAccess from "./EarlyAccess";
-import BuilderExample from "./BuilderExample";
 export function CTAButtons({ onConnect }) {
   return (
     <div className="cta-buttons">
       <a className="button primary" href="#playground">
-        Open Playground <span aria-hidden="true">↗</span>
+        Try the live demo <span aria-hidden="true">↗</span>
       </a>
       <button className="button secondary" onClick={onConnect}>
         Connect a Device <span aria-hidden="true">＋</span>
@@ -21,23 +19,26 @@ export default function Hero({ onConnect }) {
         Biosignals for everyone · Prototyping on Muse 2
       </div>
       <h1>
-        Add biological inputs
-        <br className="desktop-break" /> to your app <span>in minutes.</span>
+        Live signals.
+        <br className="desktop-break" /> <span>Real app actions.</span>
       </h1>
       <p>
-        A visual canvas and event layer that turns EEG, EMG, ECG, and EOG into
-        simple triggers for your app.
+        Turn live EEG into blinks and closed-eye events your app can act on as
+        signals arrive. We’re building a shared event interface across neurotech
+        devices, starting with Muse 2.
       </p>
       <div className="hero-note">
         Try blinks and closed eyes today. Focus, Calm, and heartbeat events are
         planned.
       </div>
-      <EarlyAccess />
-      <BuilderExample />
+      <CTAButtons onConnect={onConnect} />
+      <div className="hero-note">
+        No signup. No headset needed.{" "}
+        <a href="/docs/">Read the quick start →</a>
+      </div>
       <div className="hero-note">
         You don’t need a neuroscience degree to build apps powered by your body.
       </div>
-      <CTAButtons onConnect={onConnect} />
     </section>
   );
 }

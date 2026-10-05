@@ -83,8 +83,10 @@ export function DeveloperSection() {
           Ship with code.
         </h2>
         <p>
-          Start with an interaction. Build toward an event your application can
-          understand.
+          Our starting point is live signal-to-event translation: device samples
+          become actions while your app is running. Hardware adapters share one
+          event contract; each new device still needs its own decoding,
+          calibration, and validation.
         </p>
         <span className="small muted">API concept · SDK in development</span>
       </div>

@@ -8,7 +8,6 @@ import {
   Examples,
   DeveloperSection,
   Integrations,
-  Validation,
   HardwareRoadmap,
 } from "./components/Sections";
 import Playground from "./components/playground/Playground";
@@ -84,7 +83,7 @@ export default function App() {
         <nav aria-label="Primary">
           <a href="#playground">Playground</a>
           <a href="#how-it-works">How it works</a>
-          <a href="#developers">Developers</a>
+          <a href="/docs/">Docs</a>
         </nav>
         <a className="contact-link" href="#developer-access">
           Developer access <span>↗</span>
@@ -104,7 +103,7 @@ export default function App() {
         <DeveloperSection />
         <HardwareRoadmap />
         <Integrations />
-        <Validation />
+
         <FAQ />
         <DeveloperAccess />
       </main>
