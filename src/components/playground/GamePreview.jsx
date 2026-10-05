@@ -58,7 +58,7 @@ export default function GamePreview({ event, paused, live, onTogglePause }) {
       <div
         className="flight-stage"
         role="img"
-        aria-label="Newt Flight automatically controlled by simulated EEG pulses"
+        aria-label={live ? "Newt Flight controlled by live EEG" : "Newt Flight controlled by recorded EEG peaks"}
       >
         <svg viewBox={`0 0 ${FIELD.width} ${FIELD.height}`} aria-hidden="true">
           <rect width="480" height="320" fill="#f5f8f4" />

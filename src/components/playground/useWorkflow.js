@@ -49,7 +49,7 @@ export default function useWorkflow(provider) {
           message.status === "connected"
             ? provider.live
               ? "Live Muse 2 connected"
-              : "Simulated EEG connected"
+              : "Recorded EEG playback"
             : "Demo paused",
         );
       if (
@@ -62,11 +62,11 @@ export default function useWorkflow(provider) {
       }
       if (
         message.type === "event" &&
-        ["eyes_closed", "eyes.closed", "blink"].includes(message.name)
+        ["eyes_closed", "eyes.closed", "blink", "signal.peak"].includes(message.name)
       ) {
         setDetected(true);
         clearTimeout(resetTrigger.current);
-        if (provider.live)
+        if (provider.live || provider.recorded)
           resetTrigger.current = setTimeout(() => {
             setDetected(false);
             setActionActive(false);
@@ -93,7 +93,7 @@ export default function useWorkflow(provider) {
                 : "Sound unavailable · visual feedback fired",
             );
           },
-          provider.live ? 0 : 350,
+          provider.live || provider.recorded ? 0 : 350,
         );
       }
     });

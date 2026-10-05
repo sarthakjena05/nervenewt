@@ -2,7 +2,7 @@ import React from "react";
 const FAQ_ITEMS = [
   {
     q: "Is NerveNewt available to use yet",
-    a: "You can try the browser demo today, with simulated signals or a Muse 2. The broader platform is in development. Request early access if you'd like to build with us.",
+    a: "You can try the browser demo today, with recorded EEG playback or a Muse 2. The broader platform is in development. Request early access if you'd like to build with us.",
   },
   {
     q: "Do you make a headset",

@@ -35,7 +35,7 @@ export default function Docs() {
           <h2>Try it in seconds.</h2>
           <ol>
             <li>
-              <a href="/#playground">Open the playground</a>. The simulator
+              <a href="/#playground">Open the playground</a>. Recorded EEG playback
               starts automatically. No account or headset required.
             </li>
             <li>
@@ -70,8 +70,8 @@ export default function Docs() {
             </thead>
             <tbody>
               <tr>
-                <td>Browser simulator</td>
-                <td>Available; synthetic EEG, no hardware.</td>
+                <td>Recorded EEG playback</td>
+                <td>Available; real AF7 recording at 160 Hz, no hardware.</td>
               </tr>
               <tr>
                 <td>Muse 2</td>
@@ -90,7 +90,7 @@ export default function Docs() {
             To try Muse 2, use Chrome or Edge on HTTPS or localhost. Turn on the
             headset, click + Connect device, and choose it in the browser
             picker. If another app is connected, disconnect it first. Cancelling
-            pairing or losing the stream returns to simulation.
+            pairing or losing the stream returns to recorded playback.
           </p>
         </section>
         <section id="events">
@@ -126,8 +126,7 @@ export default function Docs() {
             </tbody>
           </table>
           <p>
-            The simulator emits <code>eyes_closed</code> and{" "}
-            <code>eyes_open</code>. These are heuristic labels, not validated
+            Playback emits <code>signal.peak</code> on voltage crossings above 60 µV with a 700 ms debounce. These are illustrative triggers, not validated
             measurements of attention, emotion, or medical state.
           </p>
         </section>

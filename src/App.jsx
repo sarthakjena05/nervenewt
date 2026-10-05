@@ -12,7 +12,7 @@ import {
 } from "./components/Sections";
 import Playground from "./components/playground/Playground";
 import DeviceModal from "./components/playground/DeviceModal";
-import { SimulatorProvider } from "./providers/SimulatorProvider";
+import { RecordingProvider } from "./providers/RecordingProvider";
 import { MuseProvider } from "./providers/MuseProvider";
 import "./styles/site.css";
 import "./styles/playground.css";
@@ -20,7 +20,7 @@ import "./styles/playground.css";
 export default function App() {
   const [deviceOpen, setDeviceOpen] = useState(false);
   const [provider, setProvider] = useState(
-    () => new SimulatorProvider({ autoplay: true }),
+    () => new RecordingProvider(),
   );
   const [session, setSession] = useState(0);
   const [pairing, setPairing] = useState(false);
@@ -30,7 +30,7 @@ export default function App() {
   const useSimulator = () => {
     liveRef.current?.disconnect();
     liveRef.current = null;
-    setProvider(new SimulatorProvider({ autoplay: true }));
+    setProvider(new RecordingProvider());
     setSession((previous) => previous + 1);
   };
   useEffect(() => () => liveRef.current?.disconnect(), []);
@@ -50,7 +50,7 @@ export default function App() {
         ) {
           useSimulator();
           setDeviceMessage(
-            message.reason || "Muse 2 disconnected. Simulation is running.",
+            message.reason || "Muse 2 disconnected. Recorded EEG playback is running.",
           );
           setDeviceOpen(true);
         }
@@ -61,9 +61,9 @@ export default function App() {
       useSimulator();
       setDeviceMessage(
         error.name === "NotFoundError"
-          ? "Pairing cancelled. Simulation is running."
+          ? "Pairing cancelled. Recorded EEG playback is running."
           : error.message ||
-              "Could not connect to Muse 2. Simulation is running.",
+              "Could not connect to Muse 2. Recorded EEG playback is running.",
       );
       setDeviceOpen(true);
     } finally {

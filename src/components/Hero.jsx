@@ -3,7 +3,7 @@ export function CTAButtons({ onConnect }) {
   return (
     <div className="cta-buttons">
       <a className="button primary" href="#playground">
-        Try the live demo <span aria-hidden="true">↗</span>
+        Try the demo <span aria-hidden="true">↗</span>
       </a>
       <button className="button secondary" onClick={onConnect}>
         Connect a Device <span aria-hidden="true">＋</span>
@@ -28,7 +28,7 @@ export default function Hero({ onConnect }) {
         devices, starting with Muse 2.
       </p>
       <div className="hero-note">
-        Try blinks and closed eyes today. Focus, Calm, and heartbeat events are
+        Connect Muse 2 to try blinks and closed eyes. Focus, Calm, and heartbeat events are
         planned.
       </div>
       <CTAButtons onConnect={onConnect} />

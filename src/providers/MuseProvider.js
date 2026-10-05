@@ -31,7 +31,7 @@ export class MuseProvider extends DeviceProvider {
   async pair() {
     if (!this.bluetooth)
       throw new Error(
-        "Web Bluetooth requires Chrome, Edge, or Brave on desktop/Android. Falling back to simulation.",
+        "Web Bluetooth requires Chrome, Edge, or Brave on desktop/Android. Falling back to recorded EEG playback.",
       );
     const token = ++this.token;
     const check = () => {
@@ -96,7 +96,7 @@ export class MuseProvider extends DeviceProvider {
             type: "status",
             status: "disconnected",
             simulated: false,
-            reason: "Muse EEG stream stopped. Returning to simulation.",
+            reason: "Muse EEG stream stopped. Returning to recorded EEG playback.",
           });
           return;
         }

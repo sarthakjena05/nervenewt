@@ -5,7 +5,7 @@ export function DeveloperPipeline() {
   const steps = [
     {
       title: "01 / Connect",
-      body: "Pair your headset over Bluetooth in one click, or use our in-browser simulator if you don’t own hardware yet.",
+      body: "Pair your headset over Bluetooth in one click, or use recorded EEG playback if you don’t own hardware yet.",
     },
     {
       title: "02 / Pick a Signal",
@@ -28,7 +28,7 @@ export function DeveloperPipeline() {
           Connect. Pick a signal. Make something happen.
         </h2>
         <p>
-          Start with a headset or the simulator. Bring your idea; we’ll handle
+          Start with a headset or recorded EEG playback. Bring your idea; we’ll handle
           the signals.
         </p>
       </header>
@@ -41,7 +41,7 @@ export function DeveloperPipeline() {
         ))}
       </div>
       <p className="pipeline-note">
-        Blinks and Closed Eyes work in the demo. Focus, Calm, and app
+        Blinks and Closed Eyes are available when connected to Muse 2. Focus, Calm, and app
         integrations are the direction we’re building toward.
       </p>
     </section>
@@ -67,7 +67,7 @@ export function Examples() {
         ))}
       </div>
       <p className="small muted">
-        Ideas to build toward. Try Eyes Closed in the simulator above.
+        Ideas to build toward. Watch recorded signal peaks trigger jumps above.
       </p>
     </section>
   );

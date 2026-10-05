@@ -44,7 +44,7 @@ export default function DeviceModal({ open, onClose, onSimulator, message }) {
           onClose();
         }}
       >
-        Continue with simulation
+        Continue with recorded EEG
       </button>
     </dialog>
   );
