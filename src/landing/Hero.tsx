@@ -6,13 +6,9 @@ export function Hero() {
     <section id="top" aria-labelledby="hero-title" className="pt-16 pb-24 sm:pt-24 sm:pb-32">
       <Container>
         <div className="mx-auto flex max-w-[860px] flex-col items-center text-center">
-          <p className="nn-rise inline-flex items-center gap-2 rounded-full bg-ink/5 px-3 py-1 font-mono text-[12px] text-muted">
-            <span aria-hidden className="h-1.5 w-1.5 rounded-full bg-orange" />
-            Early access · Prototyping on Muse 2
-          </p>
           <h1
             id="hero-title"
-            className="nn-rise mt-6 text-[44px] leading-[1.02] font-semibold tracking-[-0.045em] text-balance text-ink [animation-delay:60ms] sm:text-[68px] lg:text-[80px]"
+            className="nn-rise text-[44px] leading-[1.02] font-semibold tracking-[-0.045em] text-balance text-ink [animation-delay:60ms] sm:text-[68px] lg:text-[80px]"
           >
             Build apps that respond to the human body.
           </h1>

@@ -7,7 +7,7 @@ export function Container({ children, className = "" }: { children: ReactNode; c
 }
 
 export function Eyebrow({ children }: { children: ReactNode }) {
-  return <p className="font-mono text-[15px] font-medium tracking-[0.12em] text-orange-ink uppercase">{children}</p>;
+  return <p className="font-mono text-[18px] font-medium tracking-[0.1em] sm:text-[20px] text-orange-ink uppercase">{children}</p>;
 }
 
 export function SectionHeading({ eyebrow, title, intro, id }: { eyebrow: string; title: ReactNode; intro?: ReactNode; id: string }) {
