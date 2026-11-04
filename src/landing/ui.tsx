@@ -45,13 +45,3 @@ export function Logo() {
   );
 }
 
-export function StatusPill({ tone, children }: { tone: "live" | "planned" | "exploring"; children: ReactNode }) {
-  const cls =
-    tone === "live" ? "bg-orange/12 text-orange-ink" : tone === "planned" ? "bg-ink/6 text-muted" : "bg-transparent text-subtle";
-  return (
-    <span className={`inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 font-mono text-[11.5px] ${cls}`}>
-      {tone === "live" && <span aria-hidden className="h-1.5 w-1.5 rounded-full bg-orange" />}
-      {children}
-    </span>
-  );
-}
