@@ -1,0 +1,98 @@
+/*
+ * One global stylesheet for every route.
+ * Layer order matters: the legacy stylesheets used by /docs/ and /demo/ sit above
+ * Tailwind's reset but below its utilities, so they never override the landing page.
+ * Tailwind only scans src/landing (source(none) + @source), so legacy class names
+ * like `container` never collide with Tailwind utilities.
+ */
+@layer theme, base, legacy, components, utilities;
+
+@import "tailwindcss/theme.css" layer(theme);
+@import "tailwindcss/preflight.css" layer(base);
+@import "./site.css" layer(legacy);
+@import "./playground.css" layer(legacy);
+@import "tailwindcss/utilities.css" layer(utilities) source(none);
+
+@source "../landing";
+@source "../App.tsx";
+
+@theme {
+  --font-sans: "Geist", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: "Geist Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+
+  --color-paper: #fbfaf6;
+  --color-paper-2: #f4f2ec;
+  --color-ink: #14202a;
+  --color-ink-2: #1b2832;
+  --color-muted: #5f676b;
+  --color-subtle: #8a8f91;
+  --color-line: #e6e3da;
+  --color-line-2: #d9d5ca;
+  --color-orange: #f16b32;
+  --color-orange-ink: #c4501d;
+}
+
+@layer legacy {
+  /* Tailwind's reset removes list markers; the docs page relies on them. */
+  .docs-page ol {
+    list-style: decimal;
+    padding-left: 1.4em;
+  }
+  .docs-page ul {
+    list-style: disc;
+    padding-left: 1.4em;
+  }
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+  }
+  body {
+    background: var(--color-paper);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+  }
+  ::selection {
+    background: #f16b3233;
+  }
+}
+
+@keyframes nn-rise {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes nn-scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@layer utilities {
+  .nn-rise {
+    animation: nn-rise 700ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  }
+  .nn-scroll {
+    animation: nn-scroll 14s linear infinite;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .nn-rise,
+  .nn-scroll {
+    animation: none !important;
+  }
+}

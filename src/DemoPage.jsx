@@ -1,23 +1,12 @@
 import React, { useState, useRef, useEffect } from "react";
 import Brand from "./components/Brand";
-import Hero from "./components/Hero";
-import DeveloperAccess from "./components/DeveloperAccess";
-import FAQ from "./components/FAQ";
-import {
-  DeveloperPipeline,
-  Examples,
-  DeveloperSection,
-  Integrations,
-  HardwareRoadmap,
-} from "./components/Sections";
 import Playground from "./components/playground/Playground";
 import DeviceModal from "./components/playground/DeviceModal";
 import { RecordingProvider } from "./providers/RecordingProvider";
 import { MuseProvider } from "./providers/MuseProvider";
-import "./styles/site.css";
-import "./styles/playground.css";
 
-export default function App() {
+/** The original EEG playground (recorded playback + Web Bluetooth Muse 2), kept at /demo/. */
+export default function DemoPage() {
   const [deviceOpen, setDeviceOpen] = useState(false);
   const [provider, setProvider] = useState(
     () => new RecordingProvider(),
@@ -77,20 +66,18 @@ export default function App() {
         Skip to playground
       </a>
       <header className="site-header container">
-        <a href="#top" aria-label="NerveNewt home">
+        <a href="/" aria-label="NerveNewt home">
           <Brand />
         </a>
         <nav aria-label="Primary">
-          <a href="#playground">Playground</a>
-          <a href="#how-it-works">How it works</a>
+          <a href="/">Home</a>
           <a href="/docs/">Docs</a>
         </nav>
-        <a className="contact-link" href="#developer-access">
-          Developer access <span>↗</span>
+        <a className="contact-link" href="/#early-access">
+          Early access <span>↗</span>
         </a>
       </header>
       <main className="container">
-        <Hero onConnect={openDevices} />
         <Playground
           key={session}
           provider={provider}
@@ -98,21 +85,13 @@ export default function App() {
           pairing={pairing}
           onDisconnect={useSimulator}
         />
-        <DeveloperPipeline />
-        <Examples />
-        <DeveloperSection />
-        <HardwareRoadmap />
-        <Integrations />
-
-        <FAQ />
-        <DeveloperAccess />
       </main>
       <footer className="site-footer container">
-        <a href="#top" aria-label="NerveNewt home">
+        <a href="/" aria-label="NerveNewt home">
           <Brand />
         </a>
         <span>Building the interface between biology and software.</span>
-        <a href="#developer-access">Developer access ↗</a>
+        <a href="/#early-access">Early access ↗</a>
         <small>© 2026 NerveNewt</small>
       </footer>
       <DeviceModal

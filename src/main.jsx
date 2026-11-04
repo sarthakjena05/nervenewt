@@ -1,9 +1,12 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import App from "./App.jsx";
+import "./styles/app.css";
+import App from "./App";
 import Docs from "./Docs.jsx";
-const Page =
-  window.location.pathname.replace(/\/$/, "") === "/docs" ? Docs : App;
+import DemoPage from "./DemoPage.jsx";
+
+const path = window.location.pathname.replace(/\/$/, "");
+const Page = path === "/docs" ? Docs : path === "/demo" ? DemoPage : App;
 const root = document.getElementById("root");
 const page = (
   <React.StrictMode>

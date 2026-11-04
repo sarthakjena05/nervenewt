@@ -2,7 +2,7 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 for (const [file, heading, url] of [
-  ["dist/index.html", "Live signals.", "https://www.nervenewt.com/"],
+  ["dist/index.html", "Build apps that respond to the human body.", "https://www.nervenewt.com/"],
   [
     "dist/docs/index.html",
     "From a signal to your first action.",

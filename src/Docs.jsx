@@ -1,6 +1,5 @@
 import React from "react";
 import Brand from "./components/Brand";
-import "./styles/site.css";
 export default function Docs() {
   return (
     <>
@@ -9,10 +8,10 @@ export default function Docs() {
           <Brand />
         </a>
         <nav aria-label="Primary">
-          <a href="/#playground">Try the demo</a>
+          <a href="/demo/">Try the demo</a>
           <a href="/docs/">Docs</a>
         </nav>
-        <a className="contact-link" href="/#developer-access">
+        <a className="contact-link" href="/#early-access">
           Early access
         </a>
       </header>
@@ -35,7 +34,7 @@ export default function Docs() {
           <h2>Try it in seconds.</h2>
           <ol>
             <li>
-              <a href="/#playground">Open the playground</a>. Recorded EEG playback
+              <a href="/demo/">Open the playground</a>. Recorded EEG playback
               starts automatically. No account or headset required.
             </li>
             <li>
