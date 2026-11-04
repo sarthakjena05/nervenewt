@@ -1,5 +1,7 @@
 import type { ReactNode } from "react";
 
+export const DOCS_URL = "https://docs.nervenewt.com";
+
 export function Container({ children, className = "" }: { children: ReactNode; className?: string }) {
   return <div className={`mx-auto w-full max-w-[1120px] px-5 sm:px-8 ${className}`}>{children}</div>;
 }
@@ -8,19 +10,9 @@ export function Eyebrow({ children }: { children: ReactNode }) {
   return <p className="font-mono text-[12px] font-medium tracking-[0.14em] text-orange-ink uppercase">{children}</p>;
 }
 
-export function SectionHeading({
-  eyebrow,
-  title,
-  intro,
-  id,
-}: {
-  eyebrow: string;
-  title: ReactNode;
-  intro?: ReactNode;
-  id: string;
-}) {
+export function SectionHeading({ eyebrow, title, intro, id }: { eyebrow: string; title: ReactNode; intro?: ReactNode; id: string }) {
   return (
-    <div className="max-w-[640px]">
+    <div className="mx-auto max-w-[640px] text-center">
       <Eyebrow>{eyebrow}</Eyebrow>
       <h2 id={id} className="mt-4 text-[32px] leading-[1.08] font-semibold tracking-[-0.03em] text-balance text-ink sm:text-[44px]">
         {title}
@@ -53,7 +45,13 @@ export function Logo() {
   );
 }
 
-export function StatusDot({ tone }: { tone: "live" | "planned" | "exploring" }) {
-  const cls = tone === "live" ? "bg-orange" : tone === "planned" ? "border border-subtle bg-transparent" : "border border-dashed border-subtle bg-transparent";
-  return <span aria-hidden className={`inline-block h-2 w-2 shrink-0 rounded-full ${cls}`} />;
+export function StatusPill({ tone, children }: { tone: "live" | "planned" | "exploring"; children: ReactNode }) {
+  const cls =
+    tone === "live" ? "bg-orange/12 text-orange-ink" : tone === "planned" ? "bg-ink/6 text-muted" : "bg-transparent text-subtle";
+  return (
+    <span className={`inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 font-mono text-[11.5px] ${cls}`}>
+      {tone === "live" && <span aria-hidden className="h-1.5 w-1.5 rounded-full bg-orange" />}
+      {children}
+    </span>
+  );
 }

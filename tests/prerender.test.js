@@ -27,7 +27,7 @@ test("docs contain actual provider contract; homepage omits unconfirmed traction
   assert.ok(docs.includes("eyes.closed"));
   assert.ok(docs.includes("physical-headband verification pending"));
   assert.ok(!home.includes("Signed Integration LOIs"));
-  assert.ok(home.includes('href="/docs/"'));
+  assert.ok(home.includes('href="https://docs.nervenewt.com"'));
 });
 test("crawler assets cover both routes", async () => {
   const sitemap = await readFile("dist/sitemap.xml", "utf8");

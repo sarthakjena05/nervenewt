@@ -71,7 +71,7 @@ export default function DemoPage() {
         </a>
         <nav aria-label="Primary">
           <a href="/">Home</a>
-          <a href="/docs/">Docs</a>
+          <a href="https://docs.nervenewt.com">Docs</a>
         </nav>
         <a className="contact-link" href="/#early-access">
           Early access <span>↗</span>

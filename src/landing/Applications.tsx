@@ -20,15 +20,15 @@ const APPS = [
 
 export function Applications() {
   return (
-    <section id="applications" aria-labelledby="apps-title" className="scroll-mt-20 border-t border-line py-24 sm:py-32">
+    <section id="applications" aria-labelledby="apps-title" className="scroll-mt-20 py-24 sm:py-32">
       <Container>
         <SectionHeading id="apps-title" eyebrow="Applications" title="What you could build." />
-        <div className="mt-14 grid gap-12 md:grid-cols-3 md:gap-10">
+        <div className="mx-auto mt-16 grid max-w-[1000px] gap-12 text-center md:grid-cols-3 md:gap-10">
           {APPS.map((a) => (
-            <div key={a.label} className="border-t-2 border-ink pt-5">
-              <p className="font-mono text-[12px] tracking-[0.1em] text-muted uppercase">{a.label}</p>
-              <h3 className="mt-3 text-[20px] leading-snug font-semibold tracking-[-0.02em] text-ink">{a.title}</h3>
-              <p className="mt-3 text-[15.5px] leading-relaxed text-muted">{a.body}</p>
+            <div key={a.label} className="flex flex-col items-center">
+              <p className="font-mono text-[12px] tracking-[0.1em] text-orange-ink uppercase">{a.label}</p>
+              <h3 className="mt-3 max-w-[280px] text-[20px] leading-snug font-semibold tracking-[-0.02em] text-balance text-ink">{a.title}</h3>
+              <p className="mt-3 max-w-[300px] text-[15.5px] leading-relaxed text-muted">{a.body}</p>
             </div>
           ))}
         </div>

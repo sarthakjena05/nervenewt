@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
-import { Container, Logo, focusRing } from "./ui";
+import { Container, DOCS_URL, Logo, focusRing } from "./ui";
 
 const LINKS = [
   { href: "#how-it-works", label: "How it works" },
   { href: "#signals", label: "Signals" },
   { href: "#applications", label: "Applications" },
-  { href: "/docs/", label: "Docs" },
+  { href: DOCS_URL, label: "Docs" },
 ];
 
 export function Nav() {
@@ -18,13 +18,9 @@ export function Nav() {
   }, []);
 
   return (
-    <header
-      className={`sticky top-0 z-40 border-b transition-colors duration-300 ${
-        scrolled ? "border-line bg-paper/85 backdrop-blur-md" : "border-transparent bg-paper/0"
-      }`}
-    >
-      <Container className="flex h-16 items-center justify-between">
-        <a href="#top" aria-label="NerveNewt home" className={`rounded-md ${focusRing}`}>
+    <header className={`sticky top-0 z-40 transition-colors duration-300 ${scrolled ? "bg-paper/80 backdrop-blur-md" : "bg-paper/0"}`}>
+      <Container className="grid h-16 grid-cols-[1fr_auto] items-center md:grid-cols-[1fr_auto_1fr]">
+        <a href="#top" aria-label="NerveNewt home" className={`justify-self-start rounded-md ${focusRing}`}>
           <Logo />
         </a>
         <nav aria-label="Primary" className="hidden items-center gap-8 md:flex">
@@ -34,8 +30,8 @@ export function Nav() {
             </a>
           ))}
         </nav>
-        <div className="flex items-center gap-4">
-          <a href="/docs/" className={`rounded text-[14px] text-muted hover:text-ink md:hidden ${focusRing}`}>
+        <div className="flex items-center gap-4 justify-self-end">
+          <a href={DOCS_URL} className={`rounded text-[14px] text-muted hover:text-ink md:hidden ${focusRing}`}>
             Docs
           </a>
           <a

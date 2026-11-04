@@ -37,21 +37,21 @@ export function EarlyAccess() {
   }
 
   return (
-    <section id="early-access" aria-labelledby="access-title" className="scroll-mt-20 border-t border-line bg-paper-2 py-24 sm:py-32">
+    <section id="early-access" aria-labelledby="access-title" className="scroll-mt-20 bg-paper-2 py-24 sm:py-32">
       <Container>
-        <div className="grid gap-12 lg:grid-cols-[1fr_440px] lg:gap-20">
-          <div>
+        <div className="mx-auto flex max-w-[480px] flex-col items-stretch gap-10">
+          <div className="text-center">
             <Eyebrow>Early access</Eyebrow>
             <h2 id="access-title" className="mt-4 text-[36px] leading-[1.05] font-semibold tracking-[-0.035em] text-balance text-ink sm:text-[52px]">
               Build with us from the start.
             </h2>
-            <p className="mt-5 max-w-[460px] text-[17px] leading-relaxed text-muted">
+            <p className="mx-auto mt-5 max-w-[440px] text-[17px] leading-relaxed text-muted">
               We're onboarding a small group of developers. Tell us what you'd build and we'll reach out as access opens.
             </p>
           </div>
 
           {status === "success" ? (
-            <div role="status" className="self-start rounded-xl border border-line bg-white p-6">
+            <div role="status" className="rounded-xl bg-white p-6 text-center">
               <p className="text-[17px] font-semibold text-ink">You're on the list.</p>
               <p className="mt-2 text-[15px] text-muted">Thanks. We'll be in touch when early access opens.</p>
               <button
@@ -102,11 +102,11 @@ export function EarlyAccess() {
                 {status === "sending" ? "Sending…" : "Get early access"}
               </button>
               {error && (
-                <p role="alert" className="text-[14px] text-[#b42318]">
+                <p role="alert" className="text-center text-[14px] text-[#b42318]">
                   {error}
                 </p>
               )}
-              <p className="text-[13px] text-subtle">We only ask for your email and what you're building. No biosignal data shared.</p>
+              <p className="text-center text-[13px] text-subtle">We only ask for your email and what you're building. No biosignal data shared.</p>
             </form>
           )}
         </div>
