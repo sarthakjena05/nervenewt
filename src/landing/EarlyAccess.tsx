@@ -106,7 +106,6 @@ export function EarlyAccess() {
                   {error}
                 </p>
               )}
-              <p className="text-center text-[13px] text-subtle">We only ask for your email and what you're building. No biosignal data shared.</p>
             </form>
           )}
         </div>

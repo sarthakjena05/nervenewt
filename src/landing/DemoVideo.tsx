@@ -9,7 +9,7 @@ const POSTER_SRC = "";
 export function DemoVideo() {
   return (
     <div className="mx-auto max-w-[960px]">
-      <div className="relative aspect-video overflow-hidden rounded-2xl bg-ink shadow-[0_30px_80px_-30px_rgba(20,32,42,0.45)]">
+      <div className="relative aspect-video overflow-hidden rounded-2xl bg-ink">
         {VIDEO_SRC ? (
           <video
             className="h-full w-full object-cover"

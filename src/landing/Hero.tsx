@@ -16,16 +16,13 @@ export function Hero() {
           >
             Build apps that respond to the human body.
           </h1>
-          <p className="nn-rise mt-6 max-w-[580px] text-[18px] leading-relaxed text-pretty text-muted [animation-delay:120ms] sm:text-[20px]">
-            Connect biosignal devices. Build visual workflows. Turn live signals into actions in your apps.
-          </p>
           <div className="nn-rise mt-9 flex flex-wrap items-center justify-center gap-x-6 gap-y-4 [animation-delay:180ms]">
             <PrimaryButton href="#early-access">
               Get early access
               <span aria-hidden>→</span>
             </PrimaryButton>
             <a href={DOCS_URL} className={`rounded text-[15px] font-medium text-ink underline-offset-4 hover:underline ${focusRing}`}>
-              Read the docs
+              Docs
             </a>
           </div>
         </div>

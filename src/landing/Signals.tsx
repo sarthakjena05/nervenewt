@@ -30,9 +30,6 @@ export function Signals() {
             </li>
           ))}
         </ul>
-        <p className="mt-14 text-center text-[13px] text-subtle">
-          Only EEG on Muse 2 is being built today. Planned signals have no committed release date.
-        </p>
       </Container>
     </section>
   );
