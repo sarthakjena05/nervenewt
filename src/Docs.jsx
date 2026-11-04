@@ -4,14 +4,14 @@ export default function Docs() {
   return (
     <>
       <header className="site-header container">
-        <a href="/" aria-label="NerveNewt home">
+        <a href="https://www.nervenewt.com/" aria-label="NerveNewt home">
           <Brand />
         </a>
         <nav aria-label="Primary">
-          <a href="/demo/">Try the demo</a>
-          <a href="/docs/">Docs</a>
+          <a href="https://www.nervenewt.com/demo/">Try the demo</a>
+          <a href="https://docs.nervenewt.com/">Docs</a>
         </nav>
-        <a className="contact-link" href="/#early-access">
+        <a className="contact-link" href="https://www.nervenewt.com/#early-access">
           Early access
         </a>
       </header>
@@ -34,7 +34,7 @@ export default function Docs() {
           <h2>Try it in seconds.</h2>
           <ol>
             <li>
-              <a href="/demo/">Open the playground</a>. Recorded EEG playback
+              <a href="https://www.nervenewt.com/demo/">Open the playground</a>. Recorded EEG playback
               starts automatically. No account or headset required.
             </li>
             <li>

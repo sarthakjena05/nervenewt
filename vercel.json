@@ -1,0 +1,9 @@
+{
+  "rewrites": [
+    {
+      "source": "/",
+      "has": [{ "type": "host", "value": "docs.nervenewt.com" }],
+      "destination": "/docs/"
+    }
+  ]
+}
