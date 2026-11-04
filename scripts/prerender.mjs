@@ -1,6 +1,8 @@
 import { readFile, writeFile, mkdir } from "node:fs/promises";
 import { render } from "../.prerender/entry-server.js";
 const template = await readFile("dist/index.html", "utf8");
+const urlFor = (path) =>
+  path === "/docs/" ? "https://docs.nervenewt.com/" : "https://www.nervenewt.com" + path;
 const pages = [
   [
     "/",
@@ -19,7 +21,7 @@ const pages = [
   ],
 ];
 for (const [path, title, description] of pages) {
-  const canonical = "https://www.nervenewt.com" + path;
+  const canonical = urlFor(path);
   const meta = `<link rel="canonical" href="${canonical}" />\n<meta property="og:type" content="website" />\n<meta property="og:site_name" content="NerveNewt" />\n<meta property="og:title" content="${title}" />\n<meta property="og:description" content="${description}" />\n<meta property="og:url" content="${canonical}" />\n<meta property="og:image" content="https://www.nervenewt.com/social-card.png" />\n<meta property="og:image:width" content="1200" />\n<meta property="og:image:height" content="630" />\n<meta property="og:image:alt" content="NerveNewt: Build apps that respond to the human body." />\n<meta name="twitter:card" content="summary_large_image" />\n<meta name="twitter:title" content="${title}" />\n<meta name="twitter:description" content="${description}" />\n<meta name="twitter:image" content="https://www.nervenewt.com/social-card.png" />`;
   const html = template
     .replace(/<title>[^<]*<\/title>/, `<title>${title}</title>`)
@@ -41,7 +43,7 @@ await writeFile(
   "dist/sitemap.xml",
   '<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">' +
     pages
-      .map(([path]) => `<url><loc>https://www.nervenewt.com${path}</loc></url>`)
+      .map(([path]) => `<url><loc>${urlFor(path)}</loc></url>`)
       .join("") +
     "</urlset>",
 );

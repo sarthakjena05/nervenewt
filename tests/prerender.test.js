@@ -6,7 +6,7 @@ for (const [file, heading, url] of [
   [
     "dist/docs/index.html",
     "From a signal to your first action.",
-    "https://www.nervenewt.com/docs/",
+    "https://docs.nervenewt.com/",
   ],
 ]) {
   test(`${file} contains readable HTML and page-specific metadata`, async () => {
@@ -31,7 +31,7 @@ test("docs contain actual provider contract; homepage omits unconfirmed traction
 });
 test("crawler assets cover both routes", async () => {
   const sitemap = await readFile("dist/sitemap.xml", "utf8");
-  assert.ok(sitemap.includes("https://www.nervenewt.com/docs/"));
+  assert.ok(sitemap.includes("https://docs.nervenewt.com/"));
   assert.match(await readFile("dist/robots.txt", "utf8"), /Sitemap:/);
   const png = await readFile("dist/social-card.png");
   assert.equal(png.readUInt32BE(16), 1200);

@@ -1,8 +1,37 @@
 {
+  "redirects": [
+    {
+      "source": "/docs",
+      "missing": [
+        {
+          "type": "host",
+          "value": "docs.nervenewt.com"
+        }
+      ],
+      "destination": "https://docs.nervenewt.com/",
+      "permanent": true
+    },
+    {
+      "source": "/docs/",
+      "missing": [
+        {
+          "type": "host",
+          "value": "docs.nervenewt.com"
+        }
+      ],
+      "destination": "https://docs.nervenewt.com/",
+      "permanent": true
+    }
+  ],
   "rewrites": [
     {
       "source": "/",
-      "has": [{ "type": "host", "value": "docs.nervenewt.com" }],
+      "has": [
+        {
+          "type": "host",
+          "value": "docs.nervenewt.com"
+        }
+      ],
       "destination": "/docs/"
     }
   ]

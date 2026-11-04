@@ -29,7 +29,7 @@ export function PrimaryButton({ href, children, className = "" }: { href: string
   return (
     <a
       href={href}
-      className={`inline-flex h-11 items-center gap-2 rounded-full bg-orange px-5 text-[15px] font-semibold text-ink transition-colors hover:bg-[#f5814f] ${focusRing} ${className}`}
+      className={`inline-flex h-11 items-center gap-2 rounded-full bg-orange px-5 text-[15px] font-semibold text-paper transition-colors hover:bg-orange-ink ${focusRing} ${className}`}
     >
       {children}
     </a>

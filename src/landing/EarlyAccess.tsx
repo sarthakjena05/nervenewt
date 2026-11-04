@@ -97,7 +97,7 @@ export function EarlyAccess() {
               <button
                 type="submit"
                 disabled={status === "sending"}
-                className={`inline-flex h-11 w-full items-center justify-center rounded-full bg-orange px-5 text-[15px] font-semibold text-ink transition-colors hover:bg-[#f5814f] disabled:opacity-60 ${focusRing}`}
+                className={`inline-flex h-11 w-full items-center justify-center rounded-full bg-orange px-5 text-[15px] font-semibold text-paper transition-colors hover:bg-orange-ink disabled:opacity-60 ${focusRing}`}
               >
                 {status === "sending" ? "Sending…" : "Get early access"}
               </button>
